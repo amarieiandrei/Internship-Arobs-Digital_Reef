@@ -1,0 +1,72 @@
+@import "../../../styles.scss";
+
+.blueline {
+  height: 40px;
+  background-color: #2b7bbf;
+}
+
+.header {
+  height: 90px;
+  display: flex;
+}
+
+.header__logo {
+  height: 60px;
+  margin: auto 0;
+}
+
+.header__title {
+  display: flex;
+  place-items: center;
+  height: 60px;
+  margin: auto 0;
+  color: #999;
+  font-weight: 900;
+  letter-spacing: -2px;
+  font-size: 52px;
+}
+
+.title__thin {
+  font-weight: 100;
+  font-family: $Quicksand;
+}
+
+.header__text {
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin: 0 0 0 15px;
+  padding: 0 0 0 15px;
+}
+
+.text__welcome {
+  font-family: Regular;
+  font-size: 42px;
+  color: #999;
+}
+
+.text__content {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: -15px;
+  display: inline-block;
+}
+
+.text__link {
+  color: #007cc0;
+  text-decoration: none;
+}
+
+.text__link:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 500px) {
+  .header__text {
+    display: none;
+  }
+}

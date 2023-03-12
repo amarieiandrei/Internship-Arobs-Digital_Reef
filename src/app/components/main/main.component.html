@@ -1,0 +1,49 @@
+<div class="main">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="main__form">
+    <!-- * alert -->
+
+    <div *ngIf="isInvalid" class="alert alert-danger isInvalid">
+      <span>Invalid "Username" and/or "Password"&ensp;</span>
+      <fa-icon [icon]="faXmark"></fa-icon>
+    </div>
+
+    <div class="form__field">
+      <label class="field__label"> Username </label>
+      <input
+        (keyup)="onKey()"
+        [(ngModel)]="username"
+        class="field__input field__input--left"
+        type="username"
+        name="username"
+        placeholder=""
+      />
+    </div>
+
+    <div class="form__field">
+      <label class="field__label"> Password </label>
+      <input
+        (keyup)="onKey()"
+        [(ngModel)]="password"
+        class="field__input"
+        [type]="changeType ? 'normal' : 'password'"
+        name="password"
+        placeholder=""
+      />
+      <fa-icon
+        class="field__icon"
+        [icon]="showPsw ? faEyeSlash : faEye"
+        (click)="tooglePsw()"
+      ></fa-icon>
+    </div>
+
+    <div class="form__checkbox">
+      <label class="checkbox__label">
+        <input type="checkbox" name="checkbox" value="rememberMe" />
+        Remember Me
+      </label>
+      <a href="" class="checkbox__changepsw">Change Password...</a>
+    </div>
+
+    <button class="form__login" [class.disabled]="disabled">Log in</button>
+  </form>
+</div>
