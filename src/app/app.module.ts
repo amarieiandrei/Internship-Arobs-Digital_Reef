@@ -9,7 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,13 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     MainComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    FormsModule,
+    ModalModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

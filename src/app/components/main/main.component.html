@@ -2,9 +2,17 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="main__form">
     <!-- * alert -->
 
-    <div *ngIf="isInvalid" class="alert alert-danger isInvalid">
-      <span>Invalid "Username" and/or "Password"&ensp;</span>
-      <fa-icon [icon]="faXmark"></fa-icon>
+    <div *ngIf="isInvalid" class="alert-danger--custom">
+      <div class="custom__triangle"></div>
+      <fa-icon [icon]="faCircleExclamation" style="font-size: 14px"></fa-icon>
+      <span class="custom__text"
+        >&ensp;Invalid "Username" and/or "Password"&ensp;</span
+      >
+      <fa-icon
+        (click)="showAlert()"
+        [icon]="faXmark"
+        class="custom__xmark"
+      ></fa-icon>
     </div>
 
     <div class="form__field">
@@ -41,9 +49,106 @@
         <input type="checkbox" name="checkbox" value="rememberMe" />
         Remember Me
       </label>
-      <a href="" class="checkbox__changepsw">Change Password...</a>
+      <button class="checkbox__changepsw" (click)="openModal(template)">
+        Change Password...
+      </button>
     </div>
 
     <button class="form__login" [class.disabled]="disabled">Log in</button>
   </form>
 </div>
+
+<div *ngIf="editModalStayOpen">
+  {{ openModal(template) }}
+</div>
+
+<!-- ! Modal -->
+
+<ng-template #template>
+  <!-- ! Modal Header -->
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Change Password</h4>
+    <fa-icon [icon]="faQuestion" class="header__question"></fa-icon>
+    <fa-icon
+      (click)="modalRef?.hide()"
+      [icon]="faXmark"
+      class="header__xmark"
+    ></fa-icon>
+  </div>
+
+  <!-- ! Modal Form -->
+
+  <div class="modal-body">
+    <form>
+      <div class="form__field form__field--custom">
+        <label class="field__label field__label--custom">
+          Username:&nbsp;<span style="color: rgb(171, 0, 0)">*</span>
+        </label>
+        <div style="width: 86px"></div>
+        <input
+          class="field__input field__input--left field__input--custom"
+          type="username"
+          name="username"
+          placeholder=""
+        />
+        <fa-icon [icon]="faCheck" class="field__facheck"></fa-icon>
+      </div>
+
+      <div class="form__field form__field--custom">
+        <label class="field__label field__label--custom">
+          Current&nbsp;Password:&nbsp;<span style="color: rgb(171, 0, 0)"
+            >*</span
+          >
+        </label>
+        <input
+          class="field__input field__input--custom"
+          name="password"
+          type="password"
+          placeholder=""
+        />
+        <fa-icon
+          class="field__icon field__icon--custom"
+          [icon]="showPsw ? faEyeSlash : faEye"
+        ></fa-icon>
+        <fa-icon [icon]="faCheck" class="field__facheck"></fa-icon>
+      </div>
+
+      <div class="form__field form__field--custom">
+        <label class="field__label field__label--custom">
+          New&nbsp;Password:&nbsp;<span style="color: rgb(171, 0, 0)">*</span>
+        </label>
+        <div style="width: 29.5px"></div>
+        <input
+          class="field__input field__input--custom"
+          name="password"
+          type="password"
+          placeholder=""
+        />
+        <fa-icon
+          class="field__icon field__icon--custom"
+          [icon]="showPsw ? faEyeSlash : faEye"
+        ></fa-icon>
+      </div>
+      <!-- ! Password Policy Rules -->
+
+      <div class="policy-rules">
+        <p class="policy-rules__title">New Password must contain at least:</p>
+        <p class="rule">8 characters</p>
+        <p class="rule">1 uppercase letter</p>
+        <p class="rule">2 lowercase letters</p>
+        <p class="rule">2 numbers</p>
+        <p class="rule">
+          2 symbols(non-alphanumeric characters, i.e. ! @ # $ %)
+        </p>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="form__bottom">
+        <button class="bottom__save-btn disabled">Save Changes</button>
+        <button class="bottom__cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
