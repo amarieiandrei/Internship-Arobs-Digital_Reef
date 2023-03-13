@@ -10,6 +10,7 @@ import { MainComponent } from './components/main/main.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +18,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     HeaderComponent,
     FooterComponent,
     MainComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
