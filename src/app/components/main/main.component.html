@@ -1,0 +1,62 @@
+<div class="main">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="main__form">
+    <!-- * alert -->
+
+    <div *ngIf="isInvalid" class="alert-danger--custom">
+      <div class="custom__triangle"></div>
+      <fa-icon [icon]="faCircleExclamation" style="font-size: 14px"></fa-icon>
+      <span class="custom__text"
+        >&ensp;Invalid "Username" and/or "Password"&ensp;</span
+      >
+      <fa-icon
+        (click)="showAlert()"
+        [icon]="faXmark"
+        class="custom__xmark"
+      ></fa-icon>
+    </div>
+
+    <div class="form__field">
+      <label class="field__label"> Username </label>
+      <input
+        (keyup)="onKey()"
+        [(ngModel)]="username"
+        class="field__input field__input--left"
+        type="username"
+        name="username"
+        placeholder=""
+      />
+    </div>
+
+    <div class="form__field">
+      <label class="field__label"> Password </label>
+      <input
+        (keyup)="onKey()"
+        [(ngModel)]="password"
+        class="field__input"
+        [type]="changeType ? 'normal' : 'password'"
+        name="password"
+        placeholder=""
+      />
+      <fa-icon
+        class="field__icon"
+        [icon]="showPsw ? faEyeSlash : faEye"
+        (click)="tooglePsw()"
+      ></fa-icon>
+    </div>
+
+    <div class="form__checkbox">
+      <label class="checkbox__label">
+        <input type="checkbox" name="checkbox" value="rememberMe" />
+        Remember Me
+      </label>
+      <app-change-password #modal></app-change-password>
+      <a (click)="modal.openModal()" class="checkbox__changepsw"
+        >Change Password...</a
+      >
+    </div>
+
+    <button class="form__login" [class.disabled]="disabled">Log in</button>
+  </form>
+</div>
+
+<p>pizaa@@@@@@@@@@@@@@@@@@@@</p>
