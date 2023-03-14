@@ -84,53 +84,30 @@ export class ChangePasswordComponent {
   // * Use Service To Do Logic Function to Verif Password Validation
   onKeyup(): void {
     // * 8 Characters
-    if (
-      this.changePasswordService.pwsCharactersValidation(this.currentPsw) ===
-      false
-    ) {
-      this.isCharacters = false;
-    } else {
-      this.isCharacters = true;
-    }
+    this.changePasswordService.pwsCharactersValidation(this.currentPsw) ===
+    false
+      ? (this.isCharacters = false)
+      : (this.isCharacters = true);
 
     // * 1 Uppercase Letter
-    if (
-      this.changePasswordService.pswUppercaseValidation(this.currentPsw) ===
-      true
-    ) {
-      this.isUppercase = true;
-    } else {
-      this.isUppercase = false;
-    }
+    this.changePasswordService.pswUppercaseValidation(this.currentPsw) === true
+      ? (this.isUppercase = true)
+      : (this.isUppercase = false);
 
     // * 2 Lowercase Letters
-
-    if (
-      this.changePasswordService.pswLowercaseValidation(this.currentPsw) ===
-      true
-    ) {
-      this.isLowercase = true;
-    } else {
-      this.isLowercase = false;
-    }
+    this.changePasswordService.pswLowercaseValidation(this.currentPsw) === true
+      ? (this.isLowercase = true)
+      : (this.isLowercase = false);
 
     // * 2 Numbers
-    if (
-      this.changePasswordService.pswNumberValidation(this.currentPsw) === true
-    ) {
-      this.isNumber = true;
-    } else {
-      this.isNumber = false;
-    }
+    this.changePasswordService.pswNumberValidation(this.currentPsw) === true
+      ? (this.isNumber = true)
+      : (this.isNumber = false);
 
     // * 2 Symbols
-    if (
-      this.changePasswordService.pswSymbolValidation(this.currentPsw) === true
-    ) {
-      this.isSymbol = true;
-    } else {
-      this.isSymbol = false;
-    }
+    this.changePasswordService.pswSymbolValidation(this.currentPsw) === true
+      ? (this.isSymbol = true)
+      : (this.isSymbol = false);
   }
 
   enableSaveBtn() {
