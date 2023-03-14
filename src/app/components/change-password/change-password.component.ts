@@ -41,6 +41,10 @@ export class ChangePasswordComponent {
   isLowercase: boolean = false;
   isNumber: boolean = false;
   isSymbol: boolean = false;
+  // * Disable Form Inputs when Correct
+  disableUsername: boolean = false;
+  disablePassword: boolean = false;
+  // * Disable Form Submit
   disabled: boolean = true;
 
   @ViewChild('template') template!: TemplateRef<any>;
@@ -74,15 +78,14 @@ export class ChangePasswordComponent {
   }
 
   onFocus(): void {
-    this.showPolicyRules = !this.showPolicyRules;
-  }
-
-  onFocusOut(): void {
-    this.showPolicyRules = !this.showPolicyRules;
+    this.showPolicyRules = true;
   }
 
   // * Use Service To Do Logic Function to Verif Password Validation
   onKeyup(): void {
+    // * Solved Litte bug when passwords don't match -> disable button
+    this.enableSaveBtn();
+
     // * 8 Characters
     this.changePasswordService.pwsCharactersValidation(this.currentPsw) ===
     false
@@ -111,10 +114,21 @@ export class ChangePasswordComponent {
   }
 
   enableSaveBtn() {
-    if (this.currentPsw === this.newPsw) {
-      this.disabled = false;
-    } else {
+    // * Solved Litte bug when passwords don't match -> disable button
+    if (this.currentPsw.length === 0) {
       this.disabled = true;
+      return;
+    }
+    if (
+      this.isCharacters &&
+      this.isLowercase &&
+      this.isNumber &&
+      this.isSymbol &&
+      this.isUppercase
+    ) {
+      this.currentPsw === this.newPsw
+        ? (this.disabled = false)
+        : (this.disabled = true);
     }
   }
 }
