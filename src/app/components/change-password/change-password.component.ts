@@ -41,9 +41,7 @@ export class ChangePasswordComponent {
   isLowercase: boolean = false;
   isNumber: boolean = false;
   isSymbol: boolean = false;
-  // * Alert Error
-  isInvalid: boolean = true;
-  // disabled: boolean = true;
+  disabled: boolean = true;
 
   @ViewChild('template') template!: TemplateRef<any>;
 
@@ -135,7 +133,11 @@ export class ChangePasswordComponent {
     }
   }
 
-  showAlert() {
-    this.isInvalid = !this.isInvalid;
+  enableSaveBtn() {
+    if (this.currentPsw === this.newPsw) {
+      this.disabled = false;
+    } else {
+      this.disabled = true;
+    }
   }
 }
