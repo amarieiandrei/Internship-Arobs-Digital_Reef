@@ -2,14 +2,20 @@
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="main__form">
     <!-- * alert -->
 
-    <div *ngIf="isInvalid" class="alert-danger--custom">
+    <div
+      *ngIf="
+        (isInvalid === true && uname.touched && uname.invalid) ||
+        (isInvalid === true && psw.touched && psw.invalid)
+      "
+      class="alert-danger--custom"
+    >
       <div class="custom__triangle"></div>
       <fa-icon [icon]="faCircleExclamation" style="font-size: 14px"></fa-icon>
       <span class="custom__text"
         >&ensp;Invalid "Username" and/or "Password"&ensp;</span
       >
       <fa-icon
-        (click)="showAlert()"
+        (click)="toogleAlert()"
         [icon]="faXmark"
         class="custom__xmark"
       ></fa-icon>
@@ -21,9 +27,12 @@
         (keyup)="onKey()"
         [(ngModel)]="username"
         class="field__input field__input--left"
-        type="username"
-        name="username"
-        placeholder=""
+        type="text"
+        name="uname"
+        ngModel
+        #uname="ngModel"
+        (change)="getValue(uname)"
+        required
       />
     </div>
 
@@ -34,8 +43,11 @@
         [(ngModel)]="password"
         class="field__input"
         [type]="changeType ? 'normal' : 'password'"
-        name="password"
-        placeholder=""
+        name="psw"
+        ngModel
+        #psw="ngModel"
+        (change)="getValue(psw)"
+        required
       />
       <fa-icon
         class="field__icon"

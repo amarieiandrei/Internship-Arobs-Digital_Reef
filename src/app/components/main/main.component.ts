@@ -3,6 +3,7 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -42,7 +43,16 @@ export class MainComponent {
     }
   }
 
-  showAlert() {
-    this.isInvalid = !this.isInvalid;
+  toogleAlert() {
+    this.isInvalid = false;
+  }
+
+  // ! For test the properties of NgModel Form
+  getValue(f: FormControl): void {
+    // ! Show ngModel Form Object Properties
+    console.log(f);
+    if (f.value === '') {
+      this.isInvalid = true;
+    }
   }
 }
