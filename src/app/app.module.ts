@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ChangePasswordService } from 'src/app/services/change-password.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     FormsModule,
     ModalModule.forRoot(),
   ],
-  providers: [],
+  providers: [ChangePasswordService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

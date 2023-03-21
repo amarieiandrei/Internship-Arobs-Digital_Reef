@@ -1,7 +1,6 @@
 <div class="main">
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="main__form">
     <!-- * alert -->
-
     <div
       *ngIf="
         (isInvalid === true && uname.touched && uname.invalid) ||
