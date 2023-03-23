@@ -4,6 +4,7 @@ import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',

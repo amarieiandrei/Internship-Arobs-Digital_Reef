@@ -46,6 +46,9 @@ export class ChangePasswordComponent {
   disablePassword: boolean = false;
   // * Disable Form Submit
   disabled: boolean = true;
+  // * Disable Input Form
+  disableInputCurrentPassword: boolean = false;
+  disableInputUsername: boolean = false;
 
   @ViewChild('template') template!: TemplateRef<any>;
 
@@ -129,6 +132,23 @@ export class ChangePasswordComponent {
       this.currentPsw === this.newPsw
         ? (this.disabled = false)
         : (this.disabled = true);
+    }
+  }
+
+  verifCurrentPassword(): void {
+    if (
+      this.isCharacters &&
+      this.isLowercase &&
+      this.isNumber &&
+      this.isSymbol &&
+      this.isUppercase
+    ) {
+      this.disableInputCurrentPassword = true;
+    }
+  }
+  verifUsername(): void {
+    if (this.username.length > 5) {
+      this.disableInputUsername = true;
     }
   }
 }
