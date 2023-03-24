@@ -1,3 +1,5 @@
+@import "../../../../../colors.scss";
+
 .footer {
   height: 70px;
   background-color: #000;
@@ -9,24 +11,24 @@
   right: 0;
   left: 0;
   bottom: 0;
-}
 
-.footer__text {
-  font-family: Regular;
-  color: #999;
-  font-size: 12px;
-}
+  .footer__text {
+    font-family: Regular;
+    color: $textColor;
+    font-size: 12px;
+  }
 
-.footer__btn {
-  height: 30px;
-  margin: auto 0;
-  background-color: #444;
-  border: 1px solid #999;
-  border-radius: 5px;
-  font-family: Regular;
-  color: #ccc;
-}
+  .footer__btn {
+    height: 30px;
+    margin: auto 0;
+    background-color: $footerBgColor;
+    border: 1px solid $textColor;
+    border-radius: 5px;
+    font-family: Regular;
+    color: $loginDisabled;
+  }
 
-.footer__btn:hover {
-  background-color: #333;
+  .footer__btn:hover {
+    background-color: $footerBgColorOnHover;
+  }
 }

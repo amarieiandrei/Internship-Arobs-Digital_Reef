@@ -1,147 +1,148 @@
+@import "../../../../../colors.scss";
+
 .main {
   min-height: calc(100vh - 200px);
   display: grid;
   place-content: center;
-}
 
-.main__form {
-  display: grid;
-  // place-items: center;
+  .main__form {
+    display: grid;
+    width: 560px;
+    height: 260px;
+    background-color: $bgHeader;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px $boxShadowColor;
+    padding: 20px;
 
-  width: 560px;
-  height: 260px;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
-  padding: 20px;
+    position: relative;
 
-  position: relative;
-}
+    // * Custom Alert
+    .alert-danger--custom {
+      position: absolute;
+      height: 31px;
+      display: flex;
+      align-items: center;
+      border: 1px solid red;
+      background-color: $bgCustomAlert;
+      color: $textColorCustomAlert;
+      padding: 10px;
+      right: -255px;
+      margin-top: 55px;
+      box-shadow: 3px 3px 15px $boxShadowColor;
 
-.form__field {
-  display: flex;
-  height: 40px;
-  font-family: Regular;
-  font-size: 18px;
-  margin-bottom: 20px;
-  position: relative;
-}
+      .custom__triangle::before {
+        content: "";
+        position: absolute;
+        left: 1px;
+        margin-top: -10px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid $bgCustomAlert;
+      }
 
-.field__label {
-  margin-right: 20px;
-  display: grid;
-  place-content: center;
-}
+      .custom__triangle {
+        position: absolute;
+        left: -10px;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid red;
+      }
 
-.field__input {
-  width: 100%;
-  height: 40px;
-  border-radius: 0;
-  padding: 10px;
-  border: 1px solid gray;
-}
+      .custom__icon {
+        font-size: 14px;
+      }
 
-.field__input--left {
-  margin-left: -3px;
-}
+      .custom__text {
+        font-size: 12px;
+        font-weight: 500;
+      }
 
-.field__icon {
-  position: absolute;
-  top: 7.5px;
-  right: 10px;
-  font-size: 18px;
-  cursor: pointer;
-}
+      .custom__xmark {
+        font-size: 14px;
+        color: $customXMarkColor;
+        cursor: pointer;
+      }
+    }
 
-.form__checkbox {
-  height: 30px;
-  margin: -10px 0 10px 0;
-  display: flex;
-  justify-content: space-between;
-}
+    .form__field {
+      display: flex;
+      height: 40px;
+      font-family: Regular;
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
 
-.checkbox__label {
-  cursor: pointer;
-  font-family: Regular;
-  font-size: 16px;
-  margin: auto 0;
-  margin-left: 89px;
-  // display: flex;
-  // flex-direction: center;
-}
+      .field__label {
+        margin-right: 20px;
+        display: grid;
+        place-content: center;
+      }
 
-.checkbox__changepsw {
-  display: grid;
-  place-content: center;
-  font-family: Regular;
-  color: #007cc0;
-  font-size: 16px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-}
+      .field__input {
+        width: 100%;
+        height: 40px;
+        border-radius: 0;
+        padding: 10px;
+        border: 1px solid $customXMarkColor;
 
-.checkbox__changepsw:hover {
-  text-decoration: underline;
-}
+        &.left {
+          margin-left: -3px;
+        }
+      }
 
-.form__login {
-  height: 60px;
-  width: 520px;
-  background-color: #2a7bbf;
-  color: #fff;
-  border-radius: 7px;
-  font-family: Regular;
-  font-size: 28px;
-  border: none;
-}
+      .field__icon {
+        position: absolute;
+        top: 7.5px;
+        right: 10px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+    }
 
-.disabled {
-  background-color: #ccc;
-  cursor: default;
-}
+    .form__checkbox {
+      height: 30px;
+      margin: -10px 0 10px 0;
+      display: flex;
+      justify-content: space-between;
 
-.alert-danger--custom {
-  position: absolute;
-  height: 31px;
-  display: flex;
-  align-items: center;
-  border: 1px solid red;
-  background-color: #f6ecec;
-  color: rgb(190, 0, 0);
-  padding: 10px;
-  right: -255px;
-  margin-top: 55px;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.7);
-}
+      .checkbox__label {
+        cursor: pointer;
+        font-family: Regular;
+        font-size: 16px;
+        margin: auto 0;
+        margin-left: 89px;
+      }
 
-.custom__text {
-  font-size: 12px;
-  font-weight: 500;
-}
+      .checkbox__changepsw {
+        display: grid;
+        place-content: center;
+        font-family: Regular;
+        color: $linkColor;
+        font-size: 16px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+      }
 
-.custom__xmark {
-  font-size: 14px;
-  color: gray;
-  cursor: pointer;
-}
+      .checkbox__changepsw:hover {
+        text-decoration: underline;
+      }
+    }
 
-.custom__triangle {
-  position: absolute;
-  left: -10px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid red;
-  border-right: 10px solid red;
-}
+    .form__login {
+      height: 60px;
+      width: 520px;
+      background-color: $loginColor;
+      color: #fff;
+      border-radius: 7px;
+      font-family: Regular;
+      font-size: 28px;
+      border: none;
 
-.custom__triangle::before {
-  content: "";
-  position: absolute;
-  left: 1px;
-  margin-top: -10px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid #f6ecec;
-  border-right: 10px solid #f6ecec;
+      &.disabled {
+        background-color: $loginDisabled;
+        cursor: default;
+      }
+    }
+  }
 }

@@ -37,6 +37,7 @@ export class MainComponent {
   }
 
   onKey(): void {
+    // * this.disabled = this.username && this.password ? false : true;
     if (this.username && this.password) {
       this.disabled = false;
     } else {
