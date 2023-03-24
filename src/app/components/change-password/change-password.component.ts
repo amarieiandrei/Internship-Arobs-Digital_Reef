@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { ChangePasswordService } from 'src/app/services/change-password.service';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -42,13 +43,11 @@ export class ChangePasswordComponent {
   isNumber: boolean = false;
   isSymbol: boolean = false;
   // * Disable Form Inputs when Correct
-  disableUsername: boolean = false;
-  disablePassword: boolean = false;
+  disableInputUsername: boolean = false;
+  disableInputCurrentPassword: boolean = false;
+  currentPswInDatabase: boolean = false;
   // * Disable Form Submit
   disabled: boolean = true;
-  // * Disable Input Form
-  disableInputCurrentPassword: boolean = false;
-  disableInputUsername: boolean = false;
 
   @ViewChild('template') template!: TemplateRef<any>;
 
@@ -86,69 +85,90 @@ export class ChangePasswordComponent {
 
   // * Use Service To Do Logic Function to Verif Password Validation
   onKeyup(): void {
-    // * Solved Litte bug when passwords don't match -> disable button
-    this.enableSaveBtn();
-
     // * 8 Characters
-    this.changePasswordService.pwsCharactersValidation(this.currentPsw) ===
-    false
-      ? (this.isCharacters = false)
-      : (this.isCharacters = true);
+    this.isCharacters =
+      this.changePasswordService.pwsCharactersValidation(this.newPsw) === false
+        ? false
+        : true;
 
     // * 1 Uppercase Letter
-    this.changePasswordService.pswUppercaseValidation(this.currentPsw) === true
-      ? (this.isUppercase = true)
-      : (this.isUppercase = false);
+    this.isUppercase =
+      this.changePasswordService.pswUppercaseValidation(this.newPsw) === true
+        ? true
+        : false;
 
     // * 2 Lowercase Letters
-    this.changePasswordService.pswLowercaseValidation(this.currentPsw) === true
-      ? (this.isLowercase = true)
-      : (this.isLowercase = false);
+    this.isLowercase =
+      this.changePasswordService.pswLowercaseValidation(this.newPsw) === true
+        ? true
+        : false;
 
     // * 2 Numbers
-    this.changePasswordService.pswNumberValidation(this.currentPsw) === true
-      ? (this.isNumber = true)
-      : (this.isNumber = false);
+    this.isNumber =
+      this.changePasswordService.pswNumberValidation(this.newPsw) === true
+        ? true
+        : false;
 
     // * 2 Symbols
-    this.changePasswordService.pswSymbolValidation(this.currentPsw) === true
-      ? (this.isSymbol = true)
-      : (this.isSymbol = false);
+    this.isSymbol =
+      this.changePasswordService.pswSymbolValidation(this.newPsw) === true
+        ? true
+        : false;
+
+    // * Toogle Save Button
+    this.enableSaveBtn();
   }
 
   enableSaveBtn() {
-    // * Solved Litte bug when passwords don't match -> disable button
-    if (this.currentPsw.length === 0) {
-      this.disabled = true;
-      return;
-    }
-    if (
+    this.disabled =
       this.isCharacters &&
       this.isLowercase &&
       this.isNumber &&
       this.isSymbol &&
-      this.isUppercase
-    ) {
-      this.currentPsw === this.newPsw
-        ? (this.disabled = false)
-        : (this.disabled = true);
-    }
+      this.isUppercase &&
+      this.disableInputUsername &&
+      this.disableInputCurrentPassword
+        ? false
+        : true;
   }
 
-  verifCurrentPassword(): void {
-    if (
-      this.isCharacters &&
-      this.isLowercase &&
-      this.isNumber &&
-      this.isSymbol &&
-      this.isUppercase
-    ) {
-      this.disableInputCurrentPassword = true;
-    }
-  }
+  // ! For the moment because we don't have Real Data.
+
   verifUsername(): void {
     if (this.username.length > 5) {
       this.disableInputUsername = true;
     }
+    this.enableSaveBtn();
+  }
+
+  verifCurrentPassword(): void {
+    if (this.currentPsw.length > 5) {
+      this.disableInputCurrentPassword = true;
+      this.currentPswInDatabase = true;
+    }
+    this.enableSaveBtn();
+  }
+
+  resetForm(): void {
+    this.showCurrentPsw = false;
+    this.typeCurrentPsw = false;
+    this.showNewPsw = false;
+    this.typeNewPsw = false;
+    // * Form Validation
+    this.username = '';
+    this.currentPsw = '';
+    this.newPsw = '';
+    this.showPolicyRules = false;
+    this.isCharacters = false;
+    this.isUppercase = false;
+    this.isLowercase = false;
+    this.isNumber = false;
+    this.isSymbol = false;
+    // * Disable Form Inputs when Correct
+    this.disableInputUsername = false;
+    this.disableInputCurrentPassword = false;
+    this.currentPswInDatabase = false;
+    // * Disable Form Submit
+    this.disabled = true;
   }
 }
