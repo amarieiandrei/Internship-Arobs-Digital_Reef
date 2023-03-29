@@ -76,9 +76,11 @@
         bottom: 0;
         margin-bottom: -30px;
         width: 100%;
+        min-width: 90px;
         min-height: 30px;
         border: none;
         background-color: $bgColorBtn;
+        z-index: 1;
 
         .dropdown-btn__icon {
           font-size: 14px;
@@ -95,6 +97,9 @@
       .container__dropdown-btn:hover {
         box-shadow: 1px 1px 7.5px $boxShadowColor;
       }
+    }
+    .rightside__container:hover {
+      background-color: $hoverBtnColor;
     }
 
     .rightside__help-btn {

@@ -25,7 +25,7 @@ export class TopNavbarComponent implements OnInit {
 
   // * Fields
   username!: string;
-  isDropdown: boolean = true;
+  isDropdown: boolean = false;
 
   constructor(
     private router: Router,
