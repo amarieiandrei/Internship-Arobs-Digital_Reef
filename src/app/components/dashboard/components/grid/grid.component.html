@@ -1,0 +1,18 @@
+<div class="grid-header">
+  <div class="grid-header__leftside">
+    <fa-icon [icon]="faUser" class="leftside__icon" size="xl"></fa-icon>
+    <span class="leftside__title">My Project List</span>
+  </div>
+  <div class="grid-header__rightside">
+    <button class="rightside__reload-btn">
+      <fa-icon [icon]="faArrowsRotate" class="reload-btn__icon"></fa-icon>
+      <span>Reload</span>
+    </button>
+    <input
+      type="text"
+      class="rightside__filter"
+      placeholder="Filter by Project, Status, or Description"
+    />
+    <fa-icon [icon]="faFilter" class="rightside__filter-icon"></fa-icon>
+  </div>
+</div>

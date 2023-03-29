@@ -1,0 +1,58 @@
+@import "../../../../../colors.scss";
+
+.grid-header {
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  .grid-header__leftside {
+    display: flex;
+
+    .leftside__icon {
+      color: $dashboardHeader;
+      margin-right: 10px;
+    }
+    .leftside__title {
+      color: $dashboardHeader;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  .grid-header__rightside {
+    display: flex;
+    position: relative;
+
+    .rightside__reload-btn {
+      padding: 0 30px;
+      border: 1px solid gray;
+      border-radius: 5.25px;
+      margin-right: 20px;
+      background-color: #fff;
+      color: $customXMarkColor;
+
+      .reload-btn__icon {
+        color: $blue;
+        margin-right: 7.5px;
+      }
+    }
+    .rightside__reload-btn:hover {
+      background-color: $bgHeader;
+    }
+
+    .rightside__filter {
+      width: 340px;
+      padding: 5px 30px 5px 10px;
+      border: 1px solid $customXMarkColor;
+      outline: none;
+    }
+    .rightside__filter-icon {
+      color: $bgColorFilterIcon;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      margin: 2.5px 10px 0 0;
+    }
+  }
+}
