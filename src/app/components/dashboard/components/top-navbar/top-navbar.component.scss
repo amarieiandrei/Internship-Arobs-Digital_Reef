@@ -1,0 +1,149 @@
+@import "../../../../../colors.scss";
+
+.top-navbar {
+  background-color: $blue;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  .top-navbar__leftside {
+    display: flex;
+    padding: 11.5px 10px;
+
+    .leftside__logo {
+      width: 185px;
+      margin-right: 50px;
+      cursor: pointer;
+    }
+
+    .leftside__home-btn {
+      color: #fff;
+      display: flex;
+      place-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      .home-btn__icon {
+        margin-right: 5px;
+        font-size: 14px;
+      }
+
+      .home-btn__text {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .top-navbar__rightside {
+    display: flex;
+
+    .rightside__container {
+      display: grid;
+      position: relative;
+      margin-right: 15px;
+
+      .container__user-btn {
+        color: #fff;
+        display: flex;
+        place-items: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0 15px;
+
+        .user-btn__icon-user {
+          margin-right: 7.5px;
+          font-size: 14px;
+        }
+
+        .user-btn__text {
+          margin-right: 7.5px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .user-btn__icon-caret {
+          font-size: 14px;
+        }
+      }
+      .container__user-btn:hover {
+        background-color: $hoverBtnColor;
+      }
+
+      .container__dropdown-btn {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: -30px;
+        width: 100%;
+        min-height: 30px;
+        border: none;
+        background-color: $bgColorBtn;
+
+        .dropdown-btn__icon {
+          font-size: 14px;
+          margin-right: 7.5px;
+          color: gray;
+        }
+
+        .dropdown-btn__text {
+          font-size: 14px;
+          color: #000;
+          font-weight: 500;
+        }
+      }
+      .container__dropdown-btn:hover {
+        box-shadow: 1px 1px 7.5px $boxShadowColor;
+      }
+    }
+
+    .rightside__help-btn {
+      color: #fff;
+      display: flex;
+      place-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0 15px;
+      margin-right: 15px;
+
+      .help-btn__icon {
+        margin-right: 7.5px;
+        font-size: 14px;
+      }
+
+      .help-btn__text {
+        margin-right: 7.5px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    .rightside__help-btn:hover {
+      background-color: $hoverBtnColor;
+    }
+
+    .rightside__about-btn {
+      color: #fff;
+      display: flex;
+      place-items: center;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0 15px;
+
+      .about-btn__icon {
+        margin-right: 7.5px;
+        font-size: 14px;
+      }
+
+      .about-btn__text {
+        margin-right: 7.5px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+    .rightside__about-btn:hover {
+      background-color: $hoverBtnColor;
+    }
+  }
+}

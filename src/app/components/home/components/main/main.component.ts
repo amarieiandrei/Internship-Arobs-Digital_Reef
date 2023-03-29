@@ -4,6 +4,9 @@ import { faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { DataSharedService } from 'src/app/services/data-shared.service';
 
 @Component({
   selector: 'app-main',
@@ -25,7 +28,10 @@ export class MainComponent {
   password: string = '';
   isInvalid: boolean = true;
 
-  constructor() {}
+  constructor(
+    private _dataSharedService: DataSharedService,
+    private _router: Router
+  ) {}
 
   tooglePsw(): void {
     this.showPsw = !this.showPsw;
@@ -34,6 +40,8 @@ export class MainComponent {
 
   onSubmit(values: any): void {
     console.log(values);
+    this._dataSharedService.username = values.uname;
+    this._router.navigate(['/dashboard']);
   }
 
   onKey(): void {
