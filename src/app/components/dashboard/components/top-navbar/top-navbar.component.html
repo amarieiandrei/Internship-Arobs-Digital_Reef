@@ -1,0 +1,42 @@
+<div class="top-navbar">
+  <div class="top-navbar__leftside">
+    <img
+      (click)="navigateHome()"
+      class="leftside__logo"
+      src="../../../../../assets/logo.png"
+      alt="DigitalReef Logo"
+    />
+    <button (click)="navigateHome()" class="leftside__home-btn">
+      <fa-icon [icon]="faHouseChimney" class="home-btn__icon"></fa-icon>
+      <span class="home-btn__text">Home</span>
+    </button>
+  </div>
+
+  <div class="top-navbar__rightside">
+    <div class="rightside__container">
+      <button (click)="toogleDropdown()" class="container__user-btn">
+        <fa-icon [icon]="faUser" class="user-btn__icon-user"></fa-icon>
+        <span class="user-btn__text">{{ username }}</span>
+        <fa-icon [icon]="faCaretDown" class="user-btn__icon-caret"></fa-icon>
+      </button>
+
+      <ng-template [ngIf]="isDropdown">
+        <button (click)="logout()" class="container__dropdown-btn">
+          <fa-icon
+            [icon]="faRightFromBracket"
+            class="dropdown-btn__icon"
+          ></fa-icon>
+          <span class="dropdown-btn__text">Log out</span>
+        </button>
+      </ng-template>
+    </div>
+    <button class="rightside__help-btn">
+      <fa-icon [icon]="faQuestion" class="help-btn__icon"></fa-icon>
+      <span class="help-btn__text">Help</span>
+    </button>
+    <button class="rightside__about-btn">
+      <fa-icon [icon]="faCircleInfo" class="about-btn__icon"></fa-icon>
+      <span class="about-btn__text">About</span>
+    </button>
+  </div>
+</div>
