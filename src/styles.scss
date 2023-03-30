@@ -1,8 +1,11 @@
 // ! Fonts
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 
-// ! Global Variables
+// ! Ag Grid Imports
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-alpine.css";
 
+// ! Global Variables
 $Quicksand: "Quicksand", sans-serif;
 
 html {
