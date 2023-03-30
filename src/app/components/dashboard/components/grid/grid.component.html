@@ -9,10 +9,34 @@
       <span>Reload</span>
     </button>
     <input
+      [(ngModel)]="searchText"
+      (ngModelChange)="onFilterBoxChanged()"
       type="text"
       class="rightside__filter"
       placeholder="Filter by Project, Status, or Description"
     />
     <fa-icon [icon]="faFilter" class="rightside__filter-icon"></fa-icon>
   </div>
+</div>
+
+<div class="grid-selection">
+  <span class="selection__text">Rows selected:&nbsp;</span>
+  <span class="selection__value">{{ selectedRows }}</span>
+</div>
+
+<div class="ag-grid-angular-container">
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    [columnDefs]="columnDefs"
+    [rowData]="rowData$ | async"
+    [defaultColDef]="defaultColDef"
+    [rowSelection]="'multiple'"
+    [animateRows]="true"
+    (gridReady)="onGridReady($event)"
+    (cellClicked)="onCellClicked($event)"
+    (selectionChanged)="onSelectionChanged($event)"
+    domLayout="autoHeight"
+    domLayout="autoWidth"
+  >
+  </ag-grid-angular>
 </div>

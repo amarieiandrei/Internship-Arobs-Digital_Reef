@@ -56,3 +56,30 @@
     }
   }
 }
+
+.grid-selection {
+  display: flex;
+  padding: 10px;
+  place-items: center;
+  height: 44px;
+
+  .selection__text {
+    color: $dashboardHeader;
+  }
+
+  .selection__value {
+    color: $dashboardHeader;
+    font-weight: 600;
+  }
+}
+
+.ag-grid-angular-container {
+  padding: 10px;
+
+  .ag-theme-alpine {
+    // display: grid;
+    // overflow: hidden;
+    width: 100%;
+    height: 400px;
+  }
+}
