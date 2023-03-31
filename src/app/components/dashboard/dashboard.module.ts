@@ -9,11 +9,12 @@ import { TopNavbarComponent } from './components/top-navbar/top-navbar.component
 import { GridComponent } from './components/grid/grid.component';
 
 import { ConfigService } from 'src/app/services/config.service';
+import { GridService } from 'src/app/services/grid.service';
 
 @NgModule({
   declarations: [DashboardComponent, TopNavbarComponent, GridComponent],
   imports: [CommonModule, FontAwesomeModule, AgGridModule, FormsModule],
-  providers: [ConfigService],
+  providers: [ConfigService, GridService],
   exports: [DashboardComponent],
 })
 export class DashboardModule {}
