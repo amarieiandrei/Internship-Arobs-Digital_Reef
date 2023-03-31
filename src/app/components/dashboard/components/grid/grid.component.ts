@@ -89,6 +89,8 @@ export class GridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // * Sort default data received by project name
+    // * Work with streams and Observables
     this.rowData$ = this._configService.getData();
   }
 
@@ -121,6 +123,7 @@ export class GridComponent implements OnInit {
     setTimeout(() => {
       this.successAlert = false;
     }, 2000);
+    this.selectedRows = 0;
   }
 
   verifNumber = (idField: string): void => {
@@ -147,5 +150,17 @@ export class GridComponent implements OnInit {
 
   sizeColumnsToFit = (): void => {
     this._gridApi.sizeColumnsToFit();
+  };
+
+  reloadData = (): void => {
+    this.rowData$ = this._configService.getData();
+    this.selectedRows = 0;
+  };
+
+  filterByIdDesc = (): void => {
+    let items: [] = this._gridService.getItems(this._gridApi);
+    this._gridService.sortByIdDesc(items);
+    this._gridApi.setRowData(items);
+    this.selectedRows = 0;
   };
 }

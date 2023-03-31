@@ -4,7 +4,7 @@
     <span class="leftside__title">My Project List</span>
   </div>
   <div class="grid-header__rightside">
-    <button class="rightside__reload-btn">
+    <button (click)="reloadData()" class="rightside__reload-btn">
       <fa-icon [icon]="faArrowsRotate" class="reload-btn__icon"></fa-icon>
       <span>Reload</span>
     </button>
@@ -124,7 +124,11 @@
 <div class="filter-update-data">
   <span class="filter-update-data__title">FILTER GRID & UPDATE DATA</span>
   <div class="filter-update-data__container">
-    <button type="button" class="btn btn-primary container__button">
+    <button
+      (click)="filterByIdDesc()"
+      type="button"
+      class="btn btn-primary container__button"
+    >
       <fa-icon [icon]="faArrowsRotate" class="button__icon"></fa-icon>
       Filter by ID DESC
     </button>
