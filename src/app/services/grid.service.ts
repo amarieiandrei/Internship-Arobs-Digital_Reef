@@ -45,4 +45,38 @@ export class GridService {
       return { backgroundColor: 'lightsalmon' };
     }
   };
+
+  private partition = (arr: any[], left: number, right: number): number => {
+    let pivot: number = arr[right].id;
+    let i: number = left - 1;
+
+    for (let j = left; j < right; j += 1) {
+      if (arr[j].id > pivot) {
+        i += 1;
+
+        let aux = arr[i];
+        arr[i] = arr[j];
+        arr[j] = aux;
+      }
+    }
+
+    let aux = arr[i + 1];
+    arr[i + 1] = arr[right];
+    arr[right] = aux;
+
+    return i + 1;
+  };
+
+  private quicksort = (arr: any[], left: number, right: number): any => {
+    if (left >= right) {
+      return;
+    }
+    let p = this.partition(arr, left, right);
+    this.quicksort(arr, left, p - 1);
+    this.quicksort(arr, p + 1, right);
+  };
+
+  public sortByIdDesc = (items: any): void => {
+    this.quicksort(items, 0, items.length - 1);
+  };
 }
