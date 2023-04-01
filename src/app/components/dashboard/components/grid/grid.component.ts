@@ -158,9 +158,14 @@ export class GridComponent implements OnInit {
   };
 
   filterByIdDesc = (): void => {
-    let items: [] = this._gridService.getItems(this._gridApi);
-    this._gridService.sortByIdDesc(items);
+    let items: any[] = this._gridService.getItems(this._gridApi);
+    items = this._gridService.sortByIdDesc(items);
     this._gridApi.setRowData(items);
+    this.selectedRows = 0;
+  };
+
+  updateGridNewData = (): void => {
+    this.rowData$ = this._configService.getLocalData();
     this.selectedRows = 0;
   };
 }
