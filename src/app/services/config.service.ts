@@ -8,10 +8,15 @@ import { GridData } from '../components/dashboard/types/grid-data.interface';
 })
 export class ConfigService {
   private _url = 'https://devwork.ro/projects.json';
+  private _localUrl = 'http://localhost:3000/projects';
 
   constructor(private _httpClient: HttpClient) {}
 
   getData = (): Observable<GridData[]> => {
     return this._httpClient.get<GridData[]>(this._url);
+  };
+
+  getLocalData = (): Observable<GridData[]> => {
+    return this._httpClient.get<GridData[]>(this._localUrl);
   };
 }

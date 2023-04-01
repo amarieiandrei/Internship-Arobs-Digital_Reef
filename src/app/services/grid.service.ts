@@ -46,37 +46,34 @@ export class GridService {
     }
   };
 
-  private partition = (arr: any[], left: number, right: number): number => {
-    let pivot: number = arr[right].id;
-    let i: number = left - 1;
+  // * Code readalibity - Ar fi mai bine sa apelez o librarie care sa faca merge sort?
+  // * pentru a evita boilerplate code?
+  private merge = (leftSide: any[], rightSide: any[]): any[] => {
+    let arr: any[] = new Array();
 
-    for (let j = left; j < right; j += 1) {
-      if (arr[j].id > pivot) {
-        i += 1;
-
-        let aux = arr[i];
-        arr[i] = arr[j];
-        arr[j] = aux;
+    while (leftSide.length && rightSide.length) {
+      if (leftSide[0].id > rightSide[0].id) {
+        arr.push(leftSide.shift());
+      } else {
+        arr.push(rightSide.shift());
       }
     }
 
-    let aux = arr[i + 1];
-    arr[i + 1] = arr[right];
-    arr[right] = aux;
-
-    return i + 1;
+    return [...arr, ...leftSide, ...rightSide];
   };
 
-  private quicksort = (arr: any[], left: number, right: number): any => {
-    if (left >= right) {
-      return;
+  private mergeSort = (arr: any[]): any[] => {
+    if (arr.length < 2) {
+      return arr;
     }
-    let p = this.partition(arr, left, right);
-    this.quicksort(arr, left, p - 1);
-    this.quicksort(arr, p + 1, right);
+    let middle = Math.floor(arr.length / 2);
+    let leftSide = arr.slice(0, middle);
+    let rightSide = arr.slice(middle);
+
+    return this.merge(this.mergeSort(leftSide), this.mergeSort(rightSide));
   };
 
-  public sortByIdDesc = (items: any): void => {
-    this.quicksort(items, 0, items.length - 1);
+  public sortByIdDesc = (items: any[]): any[] => {
+    return this.mergeSort(items);
   };
 }

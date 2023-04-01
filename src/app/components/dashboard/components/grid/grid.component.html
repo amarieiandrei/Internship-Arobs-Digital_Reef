@@ -39,7 +39,6 @@
     [pagination]="true"
     [paginationPageSize]="6"
   >
-    <!-- domLayout="autoWidth" -->
   </ag-grid-angular>
 </div>
 
@@ -140,7 +139,11 @@
       <fa-icon [icon]="faArrowsLeftRight" class="button__icon"></fa-icon>
       Size Columns to fit Available Grid Space
     </button>
-    <button type="button" class="btn btn-primary container__button">
+    <button
+      (click)="updateGridNewData()"
+      type="button"
+      class="btn btn-primary container__button"
+    >
       <fa-icon [icon]="faWrench" class="button__icon"></fa-icon>
       Update grid with new data from array
     </button>
