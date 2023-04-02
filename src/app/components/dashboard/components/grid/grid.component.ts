@@ -89,9 +89,7 @@ export class GridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // * Sort default data received by project name
-    // * Work with streams and Observables
-    // this.rowData$ = this._configService.getData();
+    this.rowData$ = this._configService.getData();
   }
 
   onGridReady = (params: GridReadyEvent<GridData>) => {
@@ -124,6 +122,12 @@ export class GridComponent implements OnInit {
       this.successAlert = false;
     }, 2000);
     this.selectedRows = 0;
+    this.nameField = '';
+    this.idField = '';
+    this.descriptionField = '';
+    this.dateField = '';
+    this.statusField = '';
+    this.isSubmit = true;
   }
 
   verifNumber = (idField: string): void => {

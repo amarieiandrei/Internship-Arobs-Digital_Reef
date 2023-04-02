@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { GridData } from '../components/dashboard/types/grid-data.interface';
 
 @Injectable({
@@ -12,12 +12,28 @@ export class ConfigService {
 
   constructor(private _httpClient: HttpClient) {}
 
+  // * Get Data From the Server Default Sorted by Project Name
   getData = (): Observable<GridData[]> => {
-    return this._httpClient.get<GridData[]>(this._url);
+    return this._httpClient.get<GridData[]>(this._url).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.name.localeCompare(b.name) > 0 ? 1 : -1;
+        });
+        return data;
+      })
+    );
   };
 
+  // * Get Data From the Server Default Sorted by Project Name
   // * json-server --watch db.json
   getLocalData = (): Observable<GridData[]> => {
-    return this._httpClient.get<GridData[]>(this._localUrl);
+    return this._httpClient.get<GridData[]>(this._localUrl).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.name.localeCompare(b.name) > 0 ? 1 : -1;
+        });
+        return data;
+      })
+    );
   };
 }
