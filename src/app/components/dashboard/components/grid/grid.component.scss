@@ -98,11 +98,46 @@
   .alert-danger {
     padding: 8px;
   }
+
   .alert-success {
     padding: 8px;
   }
-  .status {
+
+  .animation-alert {
+    animation-duration: 500ms;
+    animation-name: animationAlert;
+    overflow: hidden;
+    height: 40px;
+    width: 50%;
     padding: 8px;
+    margin: 0 auto;
+    text-align: center;
+    transition-delay: 1000ms;
+    margin-bottom: 5px;
+  }
+  .animation-alert::before {
+    content: attr(data-name);
+    animation-fill-mode: backwards;
+    transition: opacity 1s;
+    animation: fadeIn 3s;
+  }
+
+  @keyframes animationAlert {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 50%;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .project__data {

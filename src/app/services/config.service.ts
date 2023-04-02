@@ -16,6 +16,7 @@ export class ConfigService {
     return this._httpClient.get<GridData[]>(this._url);
   };
 
+  // * json-server --watch db.json
   getLocalData = (): Observable<GridData[]> => {
     return this._httpClient.get<GridData[]>(this._localUrl);
   };
