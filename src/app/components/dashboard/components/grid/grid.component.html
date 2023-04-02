@@ -48,15 +48,24 @@
   <span class="project__title">ADD NEW PROJECT TO GRID</span>
 
   <!-- * Alert -->
-  <div *ngIf="dangerAlert" class="alert alert-danger" role="alert">
-    Project ID must be a Number!
-  </div>
-  <div *ngIf="successAlert" class="alert alert-success" role="alert">
-    New Project Added Succesfully!
-  </div>
-  <div *ngIf="statusAlert" class="alert alert-danger status" role="alert">
-    Status must be 'AVAILABLE', 'DISABLED' or 'DELETE_PENDING'
-  </div>
+  <div
+    *ngIf="dangerAlert"
+    class="alert alert-danger animation-alert"
+    role="alert"
+    data-name="Project ID must be a Number!"
+  ></div>
+  <div
+    *ngIf="successAlert"
+    class="alert alert-success animation-alert"
+    role="alert"
+    data-name="New Project Added Succesfully!"
+  ></div>
+  <div
+    *ngIf="statusAlert"
+    class="alert alert-danger animation-alert"
+    role="alert"
+    data-name="Status must be 'AVAILABLE', 'DISABLED' or 'DELETE_PENDING'"
+  ></div>
 
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="project__data">
     <input

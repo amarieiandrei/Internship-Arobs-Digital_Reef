@@ -91,7 +91,7 @@ export class GridComponent implements OnInit {
   ngOnInit(): void {
     // * Sort default data received by project name
     // * Work with streams and Observables
-    this.rowData$ = this._configService.getData();
+    // this.rowData$ = this._configService.getData();
   }
 
   onGridReady = (params: GridReadyEvent<GridData>) => {
