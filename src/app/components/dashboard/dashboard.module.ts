@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AgGridModule } from 'ag-grid-angular';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
@@ -13,7 +15,14 @@ import { GridService } from 'src/app/services/grid.service';
 
 @NgModule({
   declarations: [DashboardComponent, TopNavbarComponent, GridComponent],
-  imports: [CommonModule, FontAwesomeModule, AgGridModule, FormsModule],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    AgGridModule,
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
+  ],
   providers: [ConfigService, GridService],
   exports: [DashboardComponent],
 })

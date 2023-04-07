@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { DataSharedService } from './services/data-shared.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -16,6 +18,8 @@ import { DataSharedService } from './services/data-shared.service';
     HttpClientModule,
     HomeModule,
     DashboardModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [DataSharedService],
   bootstrap: [AppComponent],

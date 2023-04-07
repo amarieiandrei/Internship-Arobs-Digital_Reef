@@ -16,6 +16,7 @@ import { FormControl } from '@angular/forms';
 
 import { ConfigService } from 'src/app/services/config.service';
 import { GridService } from 'src/app/services/grid.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-grid',
@@ -31,6 +32,7 @@ export class GridComponent implements OnInit {
   public faArrowsLeftRight = faArrowsLeftRight;
 
   // * Fields
+  public newVar!: any;
   public statusAlert: boolean = false;
   public successAlert: boolean = false;
   public dangerAlert: boolean = false;
@@ -39,7 +41,7 @@ export class GridComponent implements OnInit {
   public nameField!: string;
   public idField!: string;
   public descriptionField!: string;
-  public dateField!: string;
+  public dateField!: any;
   public statusField!: string;
 
   public searchText!: string;
@@ -60,13 +62,23 @@ export class GridComponent implements OnInit {
       headerName: 'ID',
       suppressSizeToFit: true,
       maxWidth: 90,
+      getQuickFilterText: () => {
+        return '';
+      },
     },
     {
       field: 'description',
       headerName: 'Description',
       suppressSizeToFit: false,
     },
-    { field: 'date', headerName: 'Date Created', suppressSizeToFit: true },
+    {
+      field: 'date',
+      headerName: 'Date Created',
+      suppressSizeToFit: true,
+      getQuickFilterText: () => {
+        return '';
+      },
+    },
     {
       field: 'status',
       headerName: 'Project Status',
@@ -113,6 +125,10 @@ export class GridComponent implements OnInit {
 
   onSubmit(values: GridData): void {
     // console.log(values);
+
+    // * FORMAT DATE BECAUSE OF DATEPICKER IN NGXBOOTSTRAP
+    values.date = moment(values.date).format('DD/MM/YYYY');
+
     const data: GridData = values;
     let items = this._gridService.getItems(this._gridApi);
     items.push(data);
@@ -136,6 +152,10 @@ export class GridComponent implements OnInit {
 
   verifStatus = (idStatus: string): void => {
     this.statusAlert = !this._gridService.isStatus(idStatus);
+  };
+
+  clearDateField = (): void => {
+    this.dateField = '';
   };
 
   getValue = (f: FormControl): void => {
