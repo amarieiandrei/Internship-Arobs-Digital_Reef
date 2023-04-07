@@ -1,12 +1,18 @@
 // ! Fonts
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 
+// ! Global Fonts
+$Quicksand: "Quicksand", sans-serif;
+
 // ! Ag Grid Imports
 @import "ag-grid-community/styles/ag-grid.css";
 @import "ag-grid-community/styles/ag-theme-alpine.css";
 
-// ! Global Variables
-$Quicksand: "Quicksand", sans-serif;
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
 html {
   height: 100%;
@@ -19,6 +25,5 @@ body {
   min-height: 100%;
   // padding-bottom: 4.4rem;
   box-sizing: inherit;
-
   overflow-x: hidden;
 }
