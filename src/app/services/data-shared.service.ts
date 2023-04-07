@@ -6,5 +6,14 @@ import { Injectable } from '@angular/core';
 export class DataSharedService {
   constructor() {}
 
-  username: string = 'No Data To Fetch...';
+  // * Getters
+  private _username: string = 'No Data To Fetch...';
+  public get username(): string {
+    return this._username;
+  }
+
+  // * Setters
+  public set username(username: string) {
+    this._username = username;
+  }
 }
