@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { GridData } from '../components/dashboard/types/grid-data.interface';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,12 @@ export class ConfigService {
       map((data) => {
         data.sort((a, b) => {
           return a.name.localeCompare(b.name) > 0 ? 1 : -1;
+        });
+        return data;
+      }),
+      map((data) => {
+        data.map((project) => {
+          project.date = moment(project.date).format('DD/MM/YYYY');
         });
         return data;
       })
