@@ -81,6 +81,10 @@
             display: flex;
             place-items: center;
 
+            &.disabled {
+              color: gray;
+            }
+
             .label__star {
               color: $starsColor;
             }
@@ -98,6 +102,10 @@
             &.STMP-host-custom {
               background-color: $bgCustomAlert;
               // font-style: italic;
+            }
+
+            &.green {
+              background-color: green;
             }
 
             &.SMTP-host-port {
@@ -218,6 +226,10 @@
   padding: 10px;
   margin-left: 347px;
   box-shadow: 3px 3px 15px $boxShadowColor;
+
+  &.host-port {
+    margin-left: 230px;
+  }
 
   .custom__triangle::before {
     content: "";

@@ -16,8 +16,21 @@
     <div class="modal-body">
       <section class="antet">
         <div class="antet__container">
-          <button type="submit" class="save-btn">Save</button>
-          <button class="discard-changes-btn">Discard Changes</button>
+          <button
+            [disabled]="disableSave"
+            type="submit"
+            class="btn btn-primary save-btn"
+          >
+            Save
+          </button>
+
+          <button
+            (click)="discardChanges()"
+            [disabled]="disableDiscardChanges"
+            class="btn btn-primary discard-changes-btn"
+          >
+            Discard Changes
+          </button>
         </div>
         <fa-icon [icon]="faQuestion" class="antet__faQuestion"></fa-icon>
       </section>
@@ -33,10 +46,11 @@
             </label>
 
             <input
+              [(ngModel)]="hostValue"
               [ngClass]="isHostValue ? 'STMP-host-custom' : ''"
               [value]="hostValue"
               #host
-              (keyup)="getValue(host.value)"
+              (keyup)="getHostValue(host.value); handleDiscardChanges()"
               name="host"
               placeholder="IP Address or Host Name"
               type="text"
@@ -44,7 +58,10 @@
             />
 
             <!-- * alert -->
-            <div *ngIf="isHostValue && isAlert" class="alert-danger--custom">
+            <div
+              *ngIf="isHostValue && isHostAlert"
+              class="alert-danger--custom"
+            >
               <div class="custom__triangle"></div>
               <fa-icon [icon]="faCircleExclamation" class="custom__icon">
               </fa-icon>
@@ -52,7 +69,7 @@
                 &nbsp; This field cannot be blank &nbsp;
               </span>
               <fa-icon
-                (click)="exitAlert()"
+                (click)="exitHostAlert()"
                 [icon]="faXmark"
                 class="custom__xmark"
               ></fa-icon>
@@ -64,11 +81,40 @@
               SMTP Host Port:
               <span class="label__star">*</span>
             </label>
-            <input type="text" class="field__input SMTP-host-port" />
+            <input
+              [(ngModel)]="hostPortValue"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              [ngClass]="isHostPortValue ? 'STMP-host-custom' : ''"
+              [value]="hostPortValue"
+              #hostPort
+              (keyup)="getHostPortValue(hostPort.value); handleDiscardChanges()"
+              name="hostPort"
+              type="text"
+              class="field__input SMTP-host-port"
+            />
+
+            <!-- * alert -->
+            <div
+              *ngIf="isHostPortValue && isHostPortAlert"
+              class="alert-danger--custom host-port"
+            >
+              <div class="custom__triangle"></div>
+              <fa-icon [icon]="faCircleExclamation" class="custom__icon">
+              </fa-icon>
+              <span class="custom__text">
+                &nbsp; This field cannot be blank &nbsp;
+              </span>
+              <fa-icon
+                (click)="exitHostPortAlert()"
+                [icon]="faXmark"
+                class="custom__xmark"
+              ></fa-icon>
+            </div>
           </div>
 
           <div class="form-check">
             <input
+              (click)="toogleCheck()"
               class="form-check-input"
               type="checkbox"
               id="flexCheckDefault"
@@ -79,18 +125,32 @@
           </div>
 
           <div class="form__field">
-            <label class="field__label">
+            <label
+              [ngClass]="disableUserId ? 'disabled' : ''"
+              class="field__label"
+            >
               User ID:
               <span class="label__star">*</span>
             </label>
-            <input type="text" class="field__input user-id" />
+            <input
+              [disabled]="disableUserId"
+              type="text"
+              class="field__input user-id"
+            />
           </div>
           <div class="form__field">
-            <label class="field__label">
+            <label
+              [ngClass]="disablePassword ? 'disabled' : ''"
+              class="field__label"
+            >
               Password:
               <span class="label__star">*</span>
             </label>
-            <input type="text" class="field__input password" />
+            <input
+              [disabled]="disablePassword"
+              type="text"
+              class="field__input password"
+            />
           </div>
         </form>
       </section>
