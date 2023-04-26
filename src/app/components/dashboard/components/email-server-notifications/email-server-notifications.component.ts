@@ -9,6 +9,7 @@ import {
   faXmark,
   faQuestion,
   faTrashCan,
+  faCircleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -19,10 +20,16 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./email-server-notifications.component.scss'],
 })
 export class EmailServerNotificationsComponent implements AfterViewInit {
+  // * Fields
+  public isAlert: boolean = true;
+  public hostValue: string = 'localhost';
+  public isHostValue: boolean = false;
+
   // * Icons
   public faXmark = faXmark;
   public faQuestion = faQuestion;
   public faTrashCan = faTrashCan;
+  public faCircleExclamation = faCircleExclamation;
 
   // * Modal
   public modalRef?: BsModalRef;
@@ -37,7 +44,6 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    // * Little Bug.
     this._cd.detectChanges();
   }
 
@@ -59,5 +65,16 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
       keyboard: false,
     });
     this.isModalOpen = false;
+  };
+
+  public getValue = (value: string): void => {
+    value === ''
+      ? ((this.isHostValue = true), (this.isAlert = true))
+      : (this.isHostValue = false);
+  };
+
+  public exitAlert = (): void => {
+    this.isAlert = false;
+    this.isHostValue = false;
   };
 }
