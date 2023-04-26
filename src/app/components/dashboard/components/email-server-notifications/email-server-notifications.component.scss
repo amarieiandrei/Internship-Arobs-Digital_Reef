@@ -4,13 +4,12 @@
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 3px 3px 15px $boxShadowColor;
-  height: 80vh;
+  height: 85vh;
 
   .modal-header {
     background-color: $modalHeader;
     color: #fff;
     height: 0px;
-    box-shadow: 3px 3px 15px $boxShadowColor;
 
     .modal-title {
       font-size: 14px;
@@ -36,7 +35,7 @@
         display: flex;
         gap: 10px;
 
-        .container__save-btn {
+        .save-btn {
           padding: 3px 30px;
           border-radius: 5.25px;
           background-color: $loginColor;
@@ -44,24 +43,12 @@
           border: none;
           color: #fff;
         }
-        .container__save-btn:hover {
+        .save-btn:hover {
           background-color: $saveBtnHover;
-        }
-
-        .container__discard-changes-btn {
-          padding: 3px 30px;
-          border: 1px solid gray;
-          border-radius: 5.25px;
-          margin-right: 20px;
-          background-color: #fff;
-          color: $customXMarkColor;
-        }
-        .container__discard-changes-btn:hover {
-          background-color: $bgHeader;
         }
       }
 
-      .container__faQuestion {
+      .antet__faQuestion {
         color: $saveBtnHover;
         font-size: 1rem;
         display: grid;
@@ -70,8 +57,8 @@
       }
     }
 
-    .email-server-configuration {
-      .esc__title {
+    section {
+      .title {
         background-color: $escTitleBg;
         padding: 5px 10px;
         margin: 0;
@@ -81,29 +68,39 @@
         border-top: 1px solid gray;
       }
 
-      .esc__form {
+      .form {
         padding: 10px;
-
         display: flex;
         flex-direction: column;
         gap: 10px;
 
         .form__field {
+          display: flex;
+
           .field__label {
+            display: flex;
+            place-items: center;
+
             .label__star {
               color: $starsColor;
             }
           }
+
           .field__input {
             right: 0;
             padding: 3px 6px;
             border: 1px solid gray;
 
-            &.smtp-host {
+            &.SMTP-host {
               margin-left: 60px;
             }
 
-            &.smtp-host-port {
+            &.STMP-host-custom {
+              background-color: $bgCustomAlert;
+              // font-style: italic;
+            }
+
+            &.SMTP-host-port {
               margin-left: 27px;
               width: 10%;
             }
@@ -116,9 +113,9 @@
               margin-left: 26px;
             }
           }
-          .field__input:focus {
-            outline: 1.35px solid $outlineInput;
-          }
+        }
+        .field__input:focus {
+          outline: 1.35px solid $outlineInput;
         }
 
         .form-check {
@@ -132,7 +129,6 @@
           }
 
           .form-check-input[type="checkbox"]:checked {
-            // background-color: #fff;
             border: 1.5px solid $saveBtnHover;
           }
         }
@@ -145,41 +141,20 @@
       }
     }
 
-    .email-notifications {
-      .en__title {
-        background-color: $escTitleBg;
-        padding: 5px 10px;
-        margin: 0;
-        color: $escTitleText;
-        font-weight: 600;
-        font-size: 14px;
-        border-top: 1px solid gray;
-      }
-
-      .en__header {
+    section {
+      .section__header {
         display: flex;
         gap: 200px;
         padding: 10px;
 
-        .header__title {
+        .header__text {
           margin: 0;
           display: grid;
           place-content: center;
         }
-
-        .header__send-to-all-btn {
-          padding: 3px 30px;
-          border: 1px solid gray;
-          border-radius: 5.25px;
-          background-color: #fff;
-          color: $customXMarkColor;
-        }
-        .header__send-to-all-btn:hover {
-          background-color: $bgHeader;
-        }
       }
 
-      .en__list {
+      .section__list {
         padding: 0 10px;
         display: flex;
         flex-direction: row;
@@ -195,30 +170,85 @@
             border: 1px solid gray;
 
             &.email {
-              width: 385px;
+              width: 384px;
             }
           }
           .field__input:focus {
             outline: 1.35px solid $outlineInput;
           }
 
-          .item__send-test-btn {
-            padding: 3px 30px;
-            border: 1px solid gray;
-            border-radius: 5.25px;
-            background-color: #fff;
-            color: $customXMarkColor;
-          }
-          .item__send-test-btn:hover {
-            background-color: $bgHeader;
-          }
-
           .item__faTrashCan {
             display: grid;
             place-content: center;
+            cursor: pointer;
           }
         }
       }
     }
+  }
+}
+
+// ! Class 'discard-changes-btn' Used in Multiple Places / Same Design.
+
+.discard-changes-btn {
+  padding: 3px 30px;
+  border: 1px solid gray;
+  border-radius: 5.25px;
+  background-color: #fff;
+  color: $customXMarkColor;
+
+  &.send-test-email-btn {
+    margin-right: 10px;
+  }
+}
+.discard-changes-btn:hover {
+  background-color: $bgHeader;
+}
+
+// ! Custom Alert
+
+.alert-danger--custom {
+  position: absolute;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+  background-color: $bgCustomAlert;
+  color: $textColorCustomAlert;
+  padding: 10px;
+  margin-left: 347px;
+  box-shadow: 3px 3px 15px $boxShadowColor;
+
+  .custom__triangle::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    margin-top: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid $bgCustomAlert;
+  }
+
+  .custom__triangle {
+    position: absolute;
+    left: -10px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid red;
+  }
+
+  .custom__icon {
+    font-size: 14px;
+  }
+
+  .custom__text {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .custom__xmark {
+    font-size: 14px;
+    color: $customXMarkColor;
+    cursor: pointer;
   }
 }
