@@ -1,0 +1,224 @@
+@import "../../../../../colors.scss";
+
+.modal-container {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  box-shadow: 3px 3px 15px $boxShadowColor;
+  height: 80vh;
+
+  .modal-header {
+    background-color: $modalHeader;
+    color: #fff;
+    height: 0px;
+    box-shadow: 3px 3px 15px $boxShadowColor;
+
+    .modal-title {
+      font-size: 14px;
+    }
+
+    .header__xmark {
+      cursor: pointer;
+      font-size: 1.15rem;
+    }
+  }
+
+  .modal-body {
+    padding: 0px;
+    background-color: $modalBodyBgColor;
+    height: calc(100% - 32px);
+
+    .antet {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+
+      .antet__container {
+        display: flex;
+        gap: 10px;
+
+        .container__save-btn {
+          padding: 3px 30px;
+          border-radius: 5.25px;
+          background-color: $loginColor;
+          color: $customXMarkColor;
+          border: none;
+          color: #fff;
+        }
+        .container__save-btn:hover {
+          background-color: $saveBtnHover;
+        }
+
+        .container__discard-changes-btn {
+          padding: 3px 30px;
+          border: 1px solid gray;
+          border-radius: 5.25px;
+          margin-right: 20px;
+          background-color: #fff;
+          color: $customXMarkColor;
+        }
+        .container__discard-changes-btn:hover {
+          background-color: $bgHeader;
+        }
+      }
+
+      .container__faQuestion {
+        color: $saveBtnHover;
+        font-size: 1rem;
+        display: grid;
+        place-content: center;
+        cursor: pointer;
+      }
+    }
+
+    .email-server-configuration {
+      .esc__title {
+        background-color: $escTitleBg;
+        padding: 5px 10px;
+        margin: 0;
+        color: $escTitleText;
+        font-weight: 600;
+        font-size: 14px;
+        border-top: 1px solid gray;
+      }
+
+      .esc__form {
+        padding: 10px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .form__field {
+          .field__label {
+            .label__star {
+              color: $starsColor;
+            }
+          }
+          .field__input {
+            right: 0;
+            padding: 3px 6px;
+            border: 1px solid gray;
+
+            &.smtp-host {
+              margin-left: 60px;
+            }
+
+            &.smtp-host-port {
+              margin-left: 27px;
+              width: 10%;
+            }
+
+            &.user-id {
+              margin-left: 40px;
+            }
+
+            &.password {
+              margin-left: 26px;
+            }
+          }
+          .field__input:focus {
+            outline: 1.35px solid $outlineInput;
+          }
+        }
+
+        .form-check {
+          margin: 10px 0;
+          width: fit-content;
+
+          .form-check-input {
+            border: 1.5px solid gray;
+            border-radius: 0px;
+            box-shadow: none;
+          }
+
+          .form-check-input[type="checkbox"]:checked {
+            // background-color: #fff;
+            border: 1.5px solid $saveBtnHover;
+          }
+        }
+        .form-check:hover {
+          color: $saveBtnHover;
+          #flexCheckDefault {
+            border: 1.5px solid $saveBtnHover;
+          }
+        }
+      }
+    }
+
+    .email-notifications {
+      .en__title {
+        background-color: $escTitleBg;
+        padding: 5px 10px;
+        margin: 0;
+        color: $escTitleText;
+        font-weight: 600;
+        font-size: 14px;
+        border-top: 1px solid gray;
+      }
+
+      .en__header {
+        display: flex;
+        gap: 200px;
+        padding: 10px;
+
+        .header__title {
+          margin: 0;
+          display: grid;
+          place-content: center;
+        }
+
+        .header__send-to-all-btn {
+          padding: 3px 30px;
+          border: 1px solid gray;
+          border-radius: 5.25px;
+          background-color: #fff;
+          color: $customXMarkColor;
+        }
+        .header__send-to-all-btn:hover {
+          background-color: $bgHeader;
+        }
+      }
+
+      .en__list {
+        padding: 0 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .list__item {
+          display: flex;
+          gap: 10px;
+
+          .field__input {
+            right: 0;
+            padding: 3px 6px;
+            border: 1px solid gray;
+
+            &.email {
+              width: 385px;
+            }
+          }
+          .field__input:focus {
+            outline: 1.35px solid $outlineInput;
+          }
+
+          .item__send-test-btn {
+            padding: 3px 30px;
+            border: 1px solid gray;
+            border-radius: 5.25px;
+            background-color: #fff;
+            color: $customXMarkColor;
+          }
+          .item__send-test-btn:hover {
+            background-color: $bgHeader;
+          }
+
+          .item__faTrashCan {
+            display: grid;
+            place-content: center;
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,6 +8,18 @@
       <fa-icon [icon]="faArrowsRotate" class="reload-btn__icon"></fa-icon>
       <span>Reload</span>
     </button>
+
+    <app-email-server-notifications
+      #modalEmailServerNotifications
+    ></app-email-server-notifications>
+
+    <button
+      (click)="modalEmailServerNotifications.openModal()"
+      class="rightside__reload-btn"
+    >
+      Email Server & Notifications
+    </button>
+
     <input
       [(ngModel)]="searchText"
       (ngModelChange)="onFilterBoxChanged()"
