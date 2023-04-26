@@ -4,12 +4,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './components/home/home.module';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
 import { DataSharedService } from './services/data-shared.service';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent],
   imports: [

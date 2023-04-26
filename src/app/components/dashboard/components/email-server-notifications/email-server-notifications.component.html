@@ -1,0 +1,93 @@
+<div *ngIf="isModalOpen">
+  {{ openModalMOMENTAN(modalEmailServerNotifications) }}
+</div>
+
+<ng-template #modalEmailServerNotifications>
+  <div class="modal-container">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Email Server & Notifications</h4>
+      <fa-icon
+        (click)="modalRef?.hide()"
+        [icon]="faXmark"
+        class="header__xmark"
+      ></fa-icon>
+    </div>
+    <div class="modal-body">
+      <section class="antet">
+        <div class="antet__container">
+          <button type="submit" class="container__save-btn">Save</button>
+          <button class="container__discard-changes-btn">
+            Discard Changes
+          </button>
+        </div>
+        <fa-icon [icon]="faQuestion" class="container__faQuestion"></fa-icon>
+      </section>
+
+      <section class="email-server-configuration">
+        <p class="esc__title">Email Server Configuration</p>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="esc__form">
+          <div class="form__field">
+            <label class="field__label">
+              SMTP Host:
+              <span class="label__star">*</span>
+            </label>
+            <input type="text" class="field__input smtp-host" />
+          </div>
+          <div class="form__field">
+            <label class="field__label">
+              SMTP Host Port:
+              <span class="label__star">*</span>
+            </label>
+            <input type="text" class="field__input smtp-host-port" />
+          </div>
+
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Use SMTP Authentication
+            </label>
+          </div>
+
+          <div class="form__field">
+            <label class="field__label">
+              User ID:
+              <span class="label__star">*</span>
+            </label>
+            <input type="text" class="field__input user-id" />
+          </div>
+          <div class="form__field">
+            <label class="field__label">
+              Password:
+              <span class="label__star">*</span>
+            </label>
+            <input type="text" class="field__input password" />
+          </div>
+        </form>
+      </section>
+
+      <section class="email-notifications">
+        <p class="en__title">Email Notifications</p>
+
+        <div class="en__header">
+          <p class="header__title">Send Email Notifications to:</p>
+          <button class="header__send-to-all-btn">
+            Send Test Email to All
+          </button>
+        </div>
+
+        <div class="en__list">
+          <div class="list__item">
+            <input type="text" class="field__input email" />
+            <button class="item__send-test-btn">Send Test Email</button>
+            <fa-icon [icon]="faTrashCan" class="item__faTrashCan"></fa-icon>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</ng-template>
