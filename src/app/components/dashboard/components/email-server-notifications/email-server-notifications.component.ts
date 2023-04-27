@@ -5,14 +5,17 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {
   faXmark,
   faQuestion,
-  faTrashCan,
   faCircleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { EmailServerNotificationsService } from 'src/app/services/email-server-notifications.service';
+import { EmailServer } from '../../types/email-server.interface';
 
 @Component({
   selector: 'app-email-server-notifications',
@@ -21,12 +24,23 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class EmailServerNotificationsComponent implements AfterViewInit {
   // * Fields
+  public pswType: boolean = false;
+
+  public isPasswordAlert: boolean = false;
+  public isUserIdAlert: boolean = false;
+  public inputUserId!: string;
+  public inputPassword: string = 'test';
+
+  public disableCheckbox: boolean = false;
+  public isChecked: boolean = false;
+
   public disableUserId: boolean = true;
   public disablePassword: boolean = true;
   public disableDiscardChanges: boolean = true;
   public disableSave: boolean = true;
 
   public isHostAlert: boolean = true;
+  public isHostFormatAlert: boolean = false;
   public isHostPortAlert: boolean = true;
   public hostValue: string = 'localhost';
   public hostPortValue: string = '25';
@@ -34,9 +48,9 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
   public isHostValue: boolean = false;
 
   // * Icons
+  public faEyeCustom = faEye;
   public faXmark = faXmark;
   public faQuestion = faQuestion;
-  public faTrashCan = faTrashCan;
   public faCircleExclamation = faCircleExclamation;
 
   // * Modal
@@ -48,7 +62,8 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
 
   constructor(
     private _modalService: BsModalService,
-    private _cd: ChangeDetectorRef
+    private _cd: ChangeDetectorRef,
+    private _ESNService: EmailServerNotificationsService
   ) {}
 
   ngAfterViewInit(): void {
@@ -76,15 +91,33 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
   };
 
   public getHostValue = (value: string): void => {
+    this.isHostFormatAlert = this._ESNService.verifSmtpHost(value);
+
+    if (this.isHostFormatAlert) {
+      this.disableCheckbox = true;
+    } else {
+      this.disableCheckbox = false;
+    }
+
     value === ''
-      ? ((this.isHostValue = true), (this.isHostAlert = true))
+      ? ((this.isHostValue = true),
+        (this.isHostAlert = true),
+        (this.disableCheckbox = true))
       : (this.isHostValue = false);
   };
 
   public getHostPortValue = (value: string): void => {
     value === ''
-      ? ((this.isHostPortValue = true), (this.isHostPortAlert = true))
+      ? ((this.isHostPortValue = true),
+        (this.isHostPortAlert = true),
+        (this.disableCheckbox = true))
       : (this.isHostPortValue = false);
+
+    if (this.hostPortValue === '') {
+      this.disableCheckbox = true;
+    } else if (this.hostValue !== '') {
+      this.disableCheckbox = false;
+    }
   };
 
   public exitHostAlert = (): void => {
@@ -92,29 +125,126 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
     this.isHostValue = false;
   };
 
+  public exitHostFormatAlert = (): void => {
+    this.isHostFormatAlert = false;
+  };
+
   public exitHostPortAlert = (): void => {
     this.isHostPortAlert = false;
     this.isHostPortValue = false;
   };
 
+  public exitUserIdAlert = (): void => {
+    this.isUserIdAlert = false;
+  };
+
+  public exitPasswordAlert = (): void => {
+    this.isPasswordAlert = false;
+  };
+
+  public handleSave = (): void => {
+    this.disableSave = this._ESNService.verifSaveBtnLogic(
+      this.hostValue,
+      this.isHostFormatAlert,
+      this.hostPortValue
+    );
+  };
+
+  public onSaveSubmit = (): void => {
+    const emailServerObj: EmailServer = {
+      mailSmtpAuth: this.isChecked,
+      mailUserId: this.inputUserId,
+      mailUserPassword: this.inputPassword,
+      smtpHostId: this.hostValue,
+      smtpHostPort: this.hostPortValue,
+    };
+    console.log(emailServerObj);
+  };
+
   public handleDiscardChanges = (): void => {
-    this.hostValue === '' || this.hostPortValue === ''
+    this.hostValue === '' ||
+    this.hostPortValue === '' ||
+    this.hostValue.localeCompare('localhost') !== 0 ||
+    this.hostPortValue.localeCompare('25') !== 0
       ? (this.disableDiscardChanges = false)
       : (this.disableDiscardChanges = true);
   };
 
-  public discardChanges = (): void => {
+  public onDiscardChanges = (): void => {
     this.hostValue = 'localhost';
     this.hostPortValue = '25';
+    this.inputUserId = '';
+    this.inputPassword = '1234';
     this.disableDiscardChanges = true;
+    this.disableSave = true;
     this.isHostAlert = true;
     this.isHostPortAlert = true;
     this.isHostPortValue = false;
     this.isHostValue = false;
+    this.isChecked = false;
+    this.disableUserId = true;
+    this.disablePassword = true;
+    this.pswType = false;
+    this.isHostFormatAlert = false;
+    this.disableCheckbox = false;
   };
 
-  public toogleCheck = (): void => {
-    this.disableUserId = !this.disableUserId;
-    this.disablePassword = !this.disablePassword;
+  public onCheck = (): void => {
+    this.isChecked = !this.isChecked;
+    if (this.isChecked === true) {
+      this.disableSave = true;
+
+      this.disableUserId = false;
+      this.disablePassword = false;
+    } else {
+      this.disableSave = false;
+
+      this.disableUserId = true;
+      this.disablePassword = true;
+    }
+  };
+
+  public getUserIdValue = (f: FormControl): void => {
+    if (f.value !== undefined) {
+      this.isUserIdAlert = false;
+    }
+    if (f.value === '') {
+      this.isUserIdAlert = true;
+    }
+  };
+
+  public handleUserIdAlert = (f: FormControl): void => {
+    if (f.value === undefined || f.value === '') {
+      this.isUserIdAlert = true;
+    }
+  };
+
+  public getPasswordValue = (f: FormControl): void => {
+    if (f.value !== undefined) {
+      this.isPasswordAlert = false;
+    }
+    if (f.value === '') {
+      this.isPasswordAlert = true;
+    }
+  };
+
+  public handlePasswordAlert = (f: FormControl): void => {
+    if (f.value === undefined || f.value === '') {
+      this.isPasswordAlert = true;
+    }
+  };
+
+  public tooglePassword = (): void => {
+    this.faEyeCustom === faEye
+      ? ((this.faEyeCustom = faEyeSlash), (this.pswType = true))
+      : ((this.faEyeCustom = faEye), (this.pswType = false));
+  };
+
+  public enableSave = (): void => {
+    if (this.inputUserId !== '' && this.inputPassword !== '') {
+      this.disableSave = false;
+    } else {
+      this.disableSave = true;
+    }
   };
 }

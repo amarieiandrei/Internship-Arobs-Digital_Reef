@@ -4,7 +4,6 @@
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   box-shadow: 3px 3px 15px $boxShadowColor;
-  height: 85vh;
 
   .modal-header {
     background-color: $modalHeader;
@@ -104,10 +103,6 @@
               // font-style: italic;
             }
 
-            &.green {
-              background-color: green;
-            }
-
             &.SMTP-host-port {
               margin-left: 27px;
               width: 10%;
@@ -120,6 +115,12 @@
             &.password {
               margin-left: 26px;
             }
+          }
+
+          .field__icon {
+            margin: auto 0;
+            margin-left: -25px;
+            cursor: pointer;
           }
         }
         .field__input:focus {
@@ -139,56 +140,18 @@
           .form-check-input[type="checkbox"]:checked {
             border: 1.5px solid $saveBtnHover;
           }
+
+          &.disabledCheckboxHover:hover {
+            color: gray;
+            #flexCheckDefault {
+              border: 1.5px solid gray;
+            }
+          }
         }
         .form-check:hover {
           color: $saveBtnHover;
           #flexCheckDefault {
             border: 1.5px solid $saveBtnHover;
-          }
-        }
-      }
-    }
-
-    section {
-      .section__header {
-        display: flex;
-        gap: 200px;
-        padding: 10px;
-
-        .header__text {
-          margin: 0;
-          display: grid;
-          place-content: center;
-        }
-      }
-
-      .section__list {
-        padding: 0 10px;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-
-        .list__item {
-          display: flex;
-          gap: 10px;
-
-          .field__input {
-            right: 0;
-            padding: 3px 6px;
-            border: 1px solid gray;
-
-            &.email {
-              width: 384px;
-            }
-          }
-          .field__input:focus {
-            outline: 1.35px solid $outlineInput;
-          }
-
-          .item__faTrashCan {
-            display: grid;
-            place-content: center;
-            cursor: pointer;
           }
         }
       }
@@ -229,6 +192,13 @@
 
   &.host-port {
     margin-left: 230px;
+  }
+
+  &.user-id {
+    margin-left: 300px;
+  }
+  &.password {
+    margin-left: 300px;
   }
 
   .custom__triangle::before {

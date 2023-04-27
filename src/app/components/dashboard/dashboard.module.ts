@@ -11,9 +11,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { GridComponent } from './components/grid/grid.component';
 import { EmailServerNotificationsComponent } from './components/email-server-notifications/email-server-notifications.component';
+import { EmailNotificationsComponent } from './components/email-notifications/email-notifications.component';
 
 import { ConfigService } from 'src/app/services/config.service';
 import { GridService } from 'src/app/services/grid.service';
+import { EmailServerNotificationsService } from 'src/app/services/email-server-notifications.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { GridService } from 'src/app/services/grid.service';
     TopNavbarComponent,
     GridComponent,
     EmailServerNotificationsComponent,
+    EmailNotificationsComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,7 @@ import { GridService } from 'src/app/services/grid.service';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
   ],
-  providers: [ConfigService, GridService],
+  providers: [ConfigService, GridService, EmailServerNotificationsService],
   exports: [DashboardComponent],
 })
 export class DashboardModule {}
