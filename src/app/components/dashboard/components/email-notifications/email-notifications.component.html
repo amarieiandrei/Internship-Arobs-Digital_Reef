@@ -1,0 +1,42 @@
+<div class="email-notifications">
+  <p class="title">Email Notifications</p>
+
+  <div class="section__header">
+    <p class="header__text">Send Email Notifications to:</p>
+    <button class="discard-changes-btn">Send Test Email to All</button>
+  </div>
+
+  <div *ngFor="let emailAddress of emailAddresses" class="section__list">
+    <div class="list__item">
+      <input
+        [ngClass]="isAlert ? 'red' : ''"
+        [(ngModel)]="inputEmail"
+        class="field__input email"
+        type="email"
+        autocomplete="off"
+        required
+        name="email"
+        ngModel
+        #email="ngModel"
+        (change)="verifEmail(inputEmail)"
+      />
+
+      <!-- * alert -->
+      <div *ngIf="isAlert" class="alert-danger--custom">
+        <div class="custom__triangle"></div>
+        <fa-icon [icon]="faCircleExclamation" class="custom__icon"> </fa-icon>
+        <span class="custom__text"> &nbsp; Invalid format &nbsp; </span>
+        <fa-icon
+          (click)="exitAlert()"
+          [icon]="faXmark"
+          class="custom__xmark"
+        ></fa-icon>
+      </div>
+
+      <button class="discard-changes-btn send-test-email-btn">
+        Send Test Email
+      </button>
+      <fa-icon [icon]="faTrashCan" class="item__faTrashCan"></fa-icon>
+    </div>
+  </div>
+</div>

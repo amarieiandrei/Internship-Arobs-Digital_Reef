@@ -17,6 +17,7 @@
       <section class="antet">
         <div class="antet__container">
           <button
+            (click)="onSaveSubmit()"
             [disabled]="disableSave"
             type="submit"
             class="btn btn-primary save-btn"
@@ -25,7 +26,7 @@
           </button>
 
           <button
-            (click)="discardChanges()"
+            (click)="onDiscardChanges()"
             [disabled]="disableDiscardChanges"
             class="btn btn-primary discard-changes-btn"
           >
@@ -38,7 +39,7 @@
       <section>
         <p class="title">Email Server Configuration</p>
 
-        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="form">
+        <form #f="ngForm" (ngSubmit)="onSaveSubmit(f.value)" class="form">
           <div class="form__field">
             <label class="field__label">
               SMTP Host:
@@ -50,11 +51,15 @@
               [ngClass]="isHostValue ? 'STMP-host-custom' : ''"
               [value]="hostValue"
               #host
-              (keyup)="getHostValue(host.value); handleDiscardChanges()"
+              (keyup)="
+                getHostValue(host.value); handleDiscardChanges(); handleSave()
+              "
               name="host"
               placeholder="IP Address or Host Name"
               type="text"
               class="field__input SMTP-host"
+              autocomplete="off"
+              required
             />
 
             <!-- * alert -->
@@ -74,6 +79,19 @@
                 class="custom__xmark"
               ></fa-icon>
             </div>
+
+            <!-- * Invalid Format -->
+            <div *ngIf="isHostFormatAlert" class="alert-danger--custom">
+              <div class="custom__triangle"></div>
+              <fa-icon [icon]="faCircleExclamation" class="custom__icon">
+              </fa-icon>
+              <span class="custom__text"> &nbsp; Invalid format! &nbsp; </span>
+              <fa-icon
+                (click)="exitHostFormatAlert()"
+                [icon]="faXmark"
+                class="custom__xmark"
+              ></fa-icon>
+            </div>
           </div>
 
           <div class="form__field">
@@ -87,10 +105,16 @@
               [ngClass]="isHostPortValue ? 'STMP-host-custom' : ''"
               [value]="hostPortValue"
               #hostPort
-              (keyup)="getHostPortValue(hostPort.value); handleDiscardChanges()"
+              (keyup)="
+                getHostPortValue(hostPort.value);
+                handleDiscardChanges();
+                handleSave()
+              "
               name="hostPort"
               type="text"
               class="field__input SMTP-host-port"
+              autocomplete="off"
+              required
             />
 
             <!-- * alert -->
@@ -112,10 +136,15 @@
             </div>
           </div>
 
-          <div class="form-check">
+          <div
+            [ngClass]="disableCheckbox ? 'disabledCheckboxHover' : ''"
+            class="form-check"
+          >
             <input
-              (click)="toogleCheck()"
-              class="form-check-input"
+              [disabled]="disableCheckbox"
+              [checked]="isChecked"
+              (click)="onCheck()"
+              class="form-check-input red"
               type="checkbox"
               id="flexCheckDefault"
             />
@@ -133,10 +162,33 @@
               <span class="label__star">*</span>
             </label>
             <input
+              [ngClass]="isUserIdAlert ? 'STMP-host-custom' : ''"
+              [(ngModel)]="inputUserId"
               [disabled]="disableUserId"
-              type="text"
               class="field__input user-id"
+              type="text"
+              autocomplete="off"
+              required
+              name="userid"
+              ngModel
+              #userid="ngModel"
+              (click)="handleUserIdAlert(userid)"
+              (keyup)="getUserIdValue(userid); enableSave()"
             />
+            <!-- * alert -->
+            <div *ngIf="isUserIdAlert" class="alert-danger--custom user-id">
+              <div class="custom__triangle"></div>
+              <fa-icon [icon]="faCircleExclamation" class="custom__icon">
+              </fa-icon>
+              <span class="custom__text">
+                &nbsp; This field cannot be blank &nbsp;
+              </span>
+              <fa-icon
+                (click)="exitUserIdAlert()"
+                [icon]="faXmark"
+                class="custom__xmark"
+              ></fa-icon>
+            </div>
           </div>
           <div class="form__field">
             <label
@@ -147,32 +199,45 @@
               <span class="label__star">*</span>
             </label>
             <input
+              [value]="inputPassword"
+              [ngClass]="isPasswordAlert ? 'STMP-host-custom' : ''"
+              [(ngModel)]="inputPassword"
               [disabled]="disablePassword"
-              type="text"
               class="field__input password"
+              [type]="pswType ? 'normal' : 'password'"
+              autocomplete="off"
+              required
+              name="password"
+              ngModel
+              #password="ngModel"
+              (click)="handlePasswordAlert(password)"
+              (keyup)="getPasswordValue(password); enableSave()"
             />
+            <fa-icon
+              *ngIf="isChecked"
+              (click)="tooglePassword()"
+              class="field__icon"
+              [icon]="faEyeCustom"
+            ></fa-icon>
+            <!-- * alert -->
+            <div *ngIf="isPasswordAlert" class="alert-danger--custom password">
+              <div class="custom__triangle"></div>
+              <fa-icon [icon]="faCircleExclamation" class="custom__icon">
+              </fa-icon>
+              <span class="custom__text">
+                &nbsp; This field cannot be blank &nbsp;
+              </span>
+              <fa-icon
+                (click)="exitPasswordAlert()"
+                [icon]="faXmark"
+                class="custom__xmark"
+              ></fa-icon>
+            </div>
           </div>
         </form>
       </section>
 
-      <section>
-        <p class="title">Email Notifications</p>
-
-        <div class="section__header">
-          <p class="header__text">Send Email Notifications to:</p>
-          <button class="discard-changes-btn">Send Test Email to All</button>
-        </div>
-
-        <div class="section__list">
-          <div class="list__item">
-            <input type="text" class="field__input email" />
-            <button class="discard-changes-btn send-test-email-btn">
-              Send Test Email
-            </button>
-            <fa-icon [icon]="faTrashCan" class="item__faTrashCan"></fa-icon>
-          </div>
-        </div>
-      </section>
+      <app-email-notifications></app-email-notifications>
     </div>
   </div>
 </ng-template>
