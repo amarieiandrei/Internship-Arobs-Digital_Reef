@@ -32,6 +32,7 @@ export class EmailServerNotificationsComponent
     {
       isAlert: false,
       inputEmail: '',
+      disableTestEmail: true,
       imposibleToDeleteAlert: false,
     },
   ];

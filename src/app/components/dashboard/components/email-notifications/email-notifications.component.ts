@@ -17,10 +17,13 @@ export class EmailNotificationsComponent {
   @Output() emailAddressesEvent = new EventEmitter<any>();
 
   // * Fields
+  public disableTestAllEmail: boolean = true;
+
   public emailAddresses: Array<EmailAddress> = [
     {
       isAlert: false,
       inputEmail: '',
+      disableTestEmail: true,
       imposibleToDeleteAlert: false,
     },
   ];
@@ -54,14 +57,22 @@ export class EmailNotificationsComponent {
   };
 
   public addNewEmailAddress = (index: number): void => {
+    this.disableTestAllEmail = false;
+    this.emailAddresses[index].disableTestEmail = false;
+
     if (index === this.emailAddresses.length - 1) {
       this.emailAddresses.push({
         isAlert: false,
         inputEmail: '',
+        disableTestEmail: true,
         imposibleToDeleteAlert: false,
       });
     }
     // * Emit the 'emailAddresses' field
     this.emailAddressesEvent.emit(this.emailAddresses);
+  };
+
+  public onClick = (): void => {
+    console.log('click');
   };
 }
