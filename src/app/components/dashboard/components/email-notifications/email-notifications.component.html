@@ -3,7 +3,13 @@
 
   <div class="section__header">
     <p class="header__text">Send Email Notifications to:</p>
-    <button class="discard-changes-btn">Send Test Email to All</button>
+    <button
+      (click)="onClick()"
+      [disabled]="disableTestAllEmail"
+      class="btn btn-primary discard-changes-btn"
+    >
+      Send Test Email to All
+    </button>
   </div>
 
   <div
@@ -36,7 +42,11 @@
         ></fa-icon>
       </div>
 
-      <button class="discard-changes-btn send-test-email-btn">
+      <button
+        (click)="onClick()"
+        [disabled]="emailAddress.disableTestEmail"
+        class="btn btn-primary discard-changes-btn send-test-email-btn"
+      >
         Send Test Email
       </button>
       <fa-icon
