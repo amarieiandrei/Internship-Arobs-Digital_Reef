@@ -6,11 +6,14 @@
     <button class="discard-changes-btn">Send Test Email to All</button>
   </div>
 
-  <div *ngFor="let emailAddress of emailAddresses" class="section__list">
+  <div
+    *ngFor="let emailAddress of emailAddresses; let index = index"
+    class="section__list"
+  >
     <div class="list__item">
       <input
-        [ngClass]="isAlert ? 'red' : ''"
-        [(ngModel)]="inputEmail"
+        [(ngModel)]="emailAddress.inputEmail"
+        [ngClass]="emailAddress.isAlert ? 'red' : ''"
         class="field__input email"
         type="email"
         autocomplete="off"
@@ -18,16 +21,16 @@
         name="email"
         ngModel
         #email="ngModel"
-        (change)="verifEmail(inputEmail)"
+        (change)="verifEmail(index); addNewEmailAddress(index)"
       />
 
       <!-- * alert -->
-      <div *ngIf="isAlert" class="alert-danger--custom">
+      <div *ngIf="emailAddress.isAlert" class="alert-danger--custom">
         <div class="custom__triangle"></div>
         <fa-icon [icon]="faCircleExclamation" class="custom__icon"> </fa-icon>
         <span class="custom__text"> &nbsp; Invalid format &nbsp; </span>
         <fa-icon
-          (click)="exitAlert()"
+          (click)="exitAlert(index)"
           [icon]="faXmark"
           class="custom__xmark"
         ></fa-icon>
@@ -36,7 +39,26 @@
       <button class="discard-changes-btn send-test-email-btn">
         Send Test Email
       </button>
-      <fa-icon [icon]="faTrashCan" class="item__faTrashCan"></fa-icon>
+      <fa-icon
+        (click)="deleteEmailAddress(index)"
+        [icon]="faTrashCan"
+        class="item__faTrashCan"
+      ></fa-icon>
+
+      <!-- * alert -->
+      <div
+        *ngIf="emailAddress.imposibleToDeleteAlert"
+        class="alert-danger--custom can-not-delete"
+      >
+        <div class="custom__triangle"></div>
+        <fa-icon [icon]="faCircleExclamation" class="custom__icon"> </fa-icon>
+        <span class="custom__text"> &nbsp; Can't delete! &nbsp; </span>
+        <fa-icon
+          (click)="exitDeleteAlert(index)"
+          [icon]="faXmark"
+          class="custom__xmark"
+        ></fa-icon>
+      </div>
     </div>
   </div>
 </div>

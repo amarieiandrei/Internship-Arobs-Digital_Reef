@@ -237,7 +237,9 @@
         </form>
       </section>
 
-      <app-email-notifications></app-email-notifications>
+      <app-email-notifications
+        (emailAddressesEvent)="recieveEmailAddresses($event)"
+      ></app-email-notifications>
     </div>
   </div>
 </ng-template>

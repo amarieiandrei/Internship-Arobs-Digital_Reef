@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
+  OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -16,14 +17,25 @@ import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EmailServerNotificationsService } from 'src/app/services/email-server-notifications.service';
 import { EmailServer } from '../../types/email-server.interface';
+import { EmailAddress } from './../../types/email-address.interface';
 
 @Component({
   selector: 'app-email-server-notifications',
   templateUrl: './email-server-notifications.component.html',
   styleUrls: ['./email-server-notifications.component.scss'],
 })
-export class EmailServerNotificationsComponent implements AfterViewInit {
+export class EmailServerNotificationsComponent
+  implements AfterViewInit, OnInit
+{
   // * Fields
+  public emailAddresses: Array<EmailAddress> = [
+    {
+      isAlert: false,
+      inputEmail: '',
+      imposibleToDeleteAlert: false,
+    },
+  ];
+
   public pswType: boolean = false;
 
   public isPasswordAlert: boolean = false;
@@ -65,6 +77,8 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
     private _cd: ChangeDetectorRef,
     private _ESNService: EmailServerNotificationsService
   ) {}
+
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this._cd.detectChanges();
@@ -152,6 +166,7 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
 
   public onSaveSubmit = (): void => {
     const emailServerObj: EmailServer = {
+      emailAddresses: this.emailAddresses,
       mailSmtpAuth: this.isChecked,
       mailUserId: this.inputUserId,
       mailUserPassword: this.inputPassword,
@@ -246,5 +261,9 @@ export class EmailServerNotificationsComponent implements AfterViewInit {
     } else {
       this.disableSave = true;
     }
+  };
+
+  public recieveEmailAddresses = ($event: any): void => {
+    this.emailAddresses = $event;
   };
 }
