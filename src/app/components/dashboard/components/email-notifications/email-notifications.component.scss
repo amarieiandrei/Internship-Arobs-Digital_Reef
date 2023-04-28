@@ -90,6 +90,12 @@
   margin-top: 30px;
   box-shadow: 3px 3px 15px $boxShadowColor;
 
+  &.can-not-delete {
+    right: 0;
+    margin-right: 107px;
+    margin-top: 40px;
+  }
+
   .custom__triangle::before {
     content: "";
     position: absolute;

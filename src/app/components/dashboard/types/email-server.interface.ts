@@ -1,5 +1,7 @@
+import { EmailAddress } from './email-address.interface';
+
 export interface EmailServer {
-  //   emailAddresses: Array<string>;
+  emailAddresses: Array<EmailAddress>;
   mailSmtpAuth: boolean;
   mailUserId: string;
   mailUserPassword: string;
