@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import {
   faCircleExclamation,
@@ -12,14 +12,14 @@ import { EmailAddress } from '../../types/email-address.interface';
   templateUrl: './email-notifications.component.html',
   styleUrls: ['./email-notifications.component.scss'],
 })
-export class EmailNotificationsComponent {
+export class EmailNotificationsComponent implements OnInit {
   // * @Output, EventEmitter
   @Output() emailAddressesEvent = new EventEmitter<any>();
 
   // * Fields
-  public disableTestAllEmail: boolean = true;
+  @Input() disableTestAllEmail: boolean = true;
 
-  public emailAddresses: Array<EmailAddress> = [
+  @Input() emailAddresses: Array<EmailAddress> = [
     {
       isAlert: false,
       inputEmail: '',
@@ -34,6 +34,8 @@ export class EmailNotificationsComponent {
   public faXmark = faXmark;
 
   constructor(private _ESNService: EmailServerNotificationsService) {}
+
+  ngOnInit(): void {}
 
   public verifEmail = (index: number): void => {
     const email = this.emailAddresses[index].inputEmail;

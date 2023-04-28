@@ -28,6 +28,7 @@ export class EmailServerNotificationsComponent
   implements AfterViewInit, OnInit
 {
   // * Fields
+  public disableTestAllEmail: boolean = true;
   public emailAddresses: Array<EmailAddress> = [
     {
       isAlert: false,
@@ -122,6 +123,8 @@ export class EmailServerNotificationsComponent
   };
 
   public getHostPortValue = (value: string): void => {
+    this.disableTestAllEmail = true;
+
     value === ''
       ? ((this.isHostPortValue = true),
         (this.isHostPortAlert = true),
@@ -203,6 +206,15 @@ export class EmailServerNotificationsComponent
     this.pswType = false;
     this.isHostFormatAlert = false;
     this.disableCheckbox = false;
+    this.emailAddresses = [
+      {
+        isAlert: false,
+        inputEmail: '',
+        disableTestEmail: true,
+        imposibleToDeleteAlert: false,
+      },
+    ];
+    this.disableTestAllEmail = true;
   };
 
   public onCheck = (): void => {

@@ -238,6 +238,8 @@
       </section>
 
       <app-email-notifications
+        [disableTestAllEmail]="disableTestAllEmail"
+        [emailAddresses]="emailAddresses"
         (emailAddressesEvent)="recieveEmailAddresses($event)"
       ></app-email-notifications>
     </div>
