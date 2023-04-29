@@ -1,6 +1,6 @@
-<div *ngIf="isModalOpen">
+<!-- <div *ngIf="isModalOpen">
   {{ openModalMOMENTAN(modalEmailServerNotifications) }}
-</div>
+</div> -->
 
 <ng-template #modalEmailServerNotifications>
   <div class="modal-container">
@@ -238,7 +238,7 @@
       </section>
 
       <app-email-notifications
-        [disableTestAllEmail]="disableTestAllEmail"
+        [hostPortValue]="hostPortValue"
         [emailAddresses]="emailAddresses"
         (emailAddressesEvent)="recieveEmailAddresses($event)"
       ></app-email-notifications>

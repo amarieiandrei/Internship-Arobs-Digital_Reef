@@ -4,7 +4,7 @@
   <div class="section__header">
     <p class="header__text">Send Email Notifications to:</p>
     <button
-      (click)="onClick()"
+      (click)="onClickTestEmail()"
       [disabled]="disableTestAllEmail"
       class="btn btn-primary discard-changes-btn"
     >
@@ -43,7 +43,7 @@
       </div>
 
       <button
-        (click)="onClick()"
+        (click)="onClickTestEmail()"
         [disabled]="emailAddress.disableTestEmail"
         class="btn btn-primary discard-changes-btn send-test-email-btn"
       >

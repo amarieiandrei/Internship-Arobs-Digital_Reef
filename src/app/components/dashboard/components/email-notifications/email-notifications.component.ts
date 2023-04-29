@@ -1,4 +1,11 @@
-import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import {
   faCircleExclamation,
@@ -12,13 +19,14 @@ import { EmailAddress } from '../../types/email-address.interface';
   templateUrl: './email-notifications.component.html',
   styleUrls: ['./email-notifications.component.scss'],
 })
-export class EmailNotificationsComponent implements OnInit {
+export class EmailNotificationsComponent implements OnInit, OnChanges {
   // * @Output, EventEmitter
   @Output() emailAddressesEvent = new EventEmitter<any>();
 
   // * Fields
-  @Input() disableTestAllEmail: boolean = true;
+  public disableTestAllEmail: boolean = true;
 
+  @Input() hostPortValue!: string;
   @Input() emailAddresses: Array<EmailAddress> = [
     {
       isAlert: false,
@@ -36,6 +44,13 @@ export class EmailNotificationsComponent implements OnInit {
   constructor(private _ESNService: EmailServerNotificationsService) {}
 
   ngOnInit(): void {}
+
+  ngOnChanges(): void {
+    this.disableTestAllEmail = true;
+    this.emailAddresses.forEach((emailAddress) => {
+      emailAddress.disableTestEmail = true;
+    });
+  }
 
   public verifEmail = (index: number): void => {
     const email = this.emailAddresses[index].inputEmail;
@@ -74,7 +89,7 @@ export class EmailNotificationsComponent implements OnInit {
     this.emailAddressesEvent.emit(this.emailAddresses);
   };
 
-  public onClick = (): void => {
-    console.log('click');
+  public onClickTestEmail = (): void => {
+    console.log('Send Test Email To All / Send Test Email');
   };
 }

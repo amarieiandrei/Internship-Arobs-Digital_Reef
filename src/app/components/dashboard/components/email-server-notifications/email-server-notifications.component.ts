@@ -28,7 +28,6 @@ export class EmailServerNotificationsComponent
   implements AfterViewInit, OnInit
 {
   // * Fields
-  public disableTestAllEmail: boolean = true;
   public emailAddresses: Array<EmailAddress> = [
     {
       isAlert: false,
@@ -97,14 +96,14 @@ export class EmailServerNotificationsComponent
     );
   };
 
-  public openModalMOMENTAN = (template: TemplateRef<any>) => {
-    this.modalRef = this._modalService.show(template, {
-      class: 'modal-lg modal-dialog-centered',
-      ignoreBackdropClick: true,
-      keyboard: false,
-    });
-    this.isModalOpen = false;
-  };
+  // public openModalMOMENTAN = (template: TemplateRef<any>) => {
+  //   this.modalRef = this._modalService.show(template, {
+  //     class: 'modal-lg modal-dialog-centered',
+  //     ignoreBackdropClick: true,
+  //     keyboard: false,
+  //   });
+  //   this.isModalOpen = false;
+  // };
 
   public getHostValue = (value: string): void => {
     this.isHostFormatAlert = this._ESNService.verifSmtpHost(value);
@@ -123,7 +122,7 @@ export class EmailServerNotificationsComponent
   };
 
   public getHostPortValue = (value: string): void => {
-    this.disableTestAllEmail = true;
+    // ! aici
 
     value === ''
       ? ((this.isHostPortValue = true),
@@ -214,7 +213,6 @@ export class EmailServerNotificationsComponent
         imposibleToDeleteAlert: false,
       },
     ];
-    this.disableTestAllEmail = true;
   };
 
   public onCheck = (): void => {
