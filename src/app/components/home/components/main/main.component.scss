@@ -4,6 +4,9 @@
   min-height: calc(100vh - 200px);
   display: grid;
   place-content: center;
+  background-image: url('../../../../../assets/background-image.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 
   .main__form {
     display: grid;
@@ -13,7 +16,6 @@
     border-radius: 10px;
     box-shadow: 3px 3px 15px $boxShadowColor;
     padding: 20px;
-
     position: relative;
 
     // * Custom Alert

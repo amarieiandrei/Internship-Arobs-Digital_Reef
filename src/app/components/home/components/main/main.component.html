@@ -1,58 +1,28 @@
 <div class="main">
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="main__form">
     <!-- * alert -->
-    <div
-      *ngIf="
+    <div *ngIf="
         (isInvalid === true && uname.touched && uname.invalid) ||
         (isInvalid === true && psw.touched && psw.invalid)
-      "
-      class="alert-danger--custom"
-    >
+      " class="alert-danger--custom">
       <div class="custom__triangle"></div>
       <fa-icon [icon]="faCircleExclamation" class="custom__icon"></fa-icon>
-      <span class="custom__text"
-        >&ensp;Invalid "Username" and/or "Password"&ensp;</span
-      >
-      <fa-icon
-        (click)="toogleAlert()"
-        [icon]="faXmark"
-        class="custom__xmark"
-      ></fa-icon>
+      <span class="custom__text">&ensp;Invalid "Username" and/or "Password"&ensp;</span>
+      <fa-icon (click)="toogleAlert()" [icon]="faXmark" class="custom__xmark"></fa-icon>
     </div>
 
     <div class="form__field">
       <label class="field__label"> Username </label>
-      <input
-        (keyup)="onKey()"
-        [(ngModel)]="username"
-        class="field__input left"
-        type="text"
-        name="uname"
-        ngModel
-        #uname="ngModel"
-        (change)="getValue(uname)"
-        required
-      />
+      <input (keyup)="onKey()" [(ngModel)]="username" class="field__input left" type="text" name="uname" ngModel
+        #uname="ngModel" (change)="getValue(uname)" required />
     </div>
 
     <div class="form__field">
       <label class="field__label"> Password </label>
-      <input
-        (keyup)="onKey()"
-        [(ngModel)]="password"
-        class="field__input"
-        [type]="changeType ? 'normal' : 'password'"
-        name="psw"
-        ngModel
-        #psw="ngModel"
-        (change)="getValue(psw)"
-        required
-      />
-      <fa-icon
-        class="field__icon"
-        [icon]="showPsw ? faEyeSlash : faEye"
-        (click)="tooglePsw()"
-      ></fa-icon>
+      <input (keyup)="onKey()" [(ngModel)]="password" class="field__input" [type]="changeType ? 'normal' : 'password'"
+        name="psw" ngModel #psw="ngModel" (change)="getValue(psw)" required />
+      <fa-icon class="field__icon" [icon]="showPsw ? faEyeSlash : faEye" (click)="tooglePsw()"
+        data-cy="psw-icon"></fa-icon>
     </div>
 
     <div class="form__checkbox">
@@ -61,19 +31,10 @@
         Remember Me
       </label>
       <app-change-password #modal></app-change-password>
-      <a
-        (click)="modal.openModal(); modal.resetForm()"
-        class="checkbox__changepsw"
-        >Change Password...</a
-      >
+      <a (click)="modal.openModal(); modal.resetForm()" class="checkbox__changepsw">Change Password...</a>
     </div>
 
-    <button
-      [disabled]="disabled"
-      type="submit"
-      class="form__login"
-      [class.disabled]="disabled"
-    >
+    <button [disabled]="disabled" type="submit" class="form__login" [class.disabled]="disabled">
       Log in
     </button>
   </form>

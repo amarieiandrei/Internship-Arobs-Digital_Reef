@@ -31,7 +31,7 @@ export class MainComponent {
   constructor(
     private _dataSharedService: DataSharedService,
     private _router: Router
-  ) {}
+  ) { }
 
   tooglePsw(): void {
     this.showPsw = !this.showPsw;
