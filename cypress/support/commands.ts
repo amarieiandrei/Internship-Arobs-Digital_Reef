@@ -36,7 +36,14 @@
 //   }
 // }
 
-
 Cypress.Commands.add('openApplication' as any, () => {
     cy.visit('/')
+})
+
+Cypress.Commands.add('login' as any, () => {
+    cy.get('form')
+        .find('[ng-reflect-name="uname"]').type('test@login')
+    cy.get('form')
+        .find('[ng-reflect-name="psw"]').type('test@login')
+    cy.get('form').submit()
 })

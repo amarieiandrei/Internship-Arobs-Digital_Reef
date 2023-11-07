@@ -1,12 +1,7 @@
 <div class="top-navbar">
   <div class="top-navbar__leftside">
-    <img
-      (click)="navigateHome()"
-      class="leftside__logo"
-      src="../../../../../assets/logo.png"
-      alt="DigitalReef Logo"
-    />
-    <button (click)="navigateHome()" class="leftside__home-btn">
+    <img (click)="navigateHome()" class="leftside__logo" src="../../../../../assets/logo.png" alt="DigitalReef Logo" />
+    <button (click)="navigateHome()" class="leftside__home-btn" data-cy="home-btn">
       <fa-icon [icon]="faHouseChimney" class="home-btn__icon"></fa-icon>
       <span class="home-btn__text">Home</span>
     </button>
@@ -14,18 +9,15 @@
 
   <div class="top-navbar__rightside">
     <div class="rightside__container">
-      <button (click)="toogleDropdown()" class="container__user-btn">
+      <button (click)="toogleDropdown()" class="container__user-btn" data-cy="top-navbar-dropdown">
         <fa-icon [icon]="faUser" class="user-btn__icon-user"></fa-icon>
         <span class="user-btn__text">{{ username }}</span>
         <fa-icon [icon]="faCaretDown" class="user-btn__icon-caret"></fa-icon>
       </button>
 
       <ng-template [ngIf]="isDropdown">
-        <button (click)="logout()" class="container__dropdown-btn">
-          <fa-icon
-            [icon]="faRightFromBracket"
-            class="dropdown-btn__icon"
-          ></fa-icon>
+        <button (click)="logout()" class="container__dropdown-btn" data-cy="top-navbar-logout">
+          <fa-icon [icon]="faRightFromBracket" class="dropdown-btn__icon"></fa-icon>
           <span class="dropdown-btn__text">Log out</span>
         </button>
       </ng-template>

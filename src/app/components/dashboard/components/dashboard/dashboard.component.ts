@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
   selector: 'app-dashboard',
   template: `<app-top-navbar></app-top-navbar><app-grid></app-grid>`,
 })
-export class DashboardComponent {}
+export class DashboardComponent { }

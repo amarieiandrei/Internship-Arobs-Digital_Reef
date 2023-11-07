@@ -1,7 +1,7 @@
-<div class="grid-header">
+<div class="grid-header" data-cy="grid-header">
   <div class="grid-header__leftside">
-    <fa-icon [icon]="faUser" class="leftside__icon" size="xl"></fa-icon>
-    <span class="leftside__title">My Project List</span>
+    <fa-icon [icon]="faUser" class="leftside__icon" size="xl" data-cy="user-icon"></fa-icon>
+    <span class="leftside__title" data-cy="dashboard-title">My Project List</span>
   </div>
   <div class="grid-header__rightside">
     <button (click)="reloadData()" class="rightside__reload-btn">
@@ -9,24 +9,14 @@
       <span>Reload</span>
     </button>
 
-    <app-email-server-notifications
-      #modalEmailServerNotifications
-    ></app-email-server-notifications>
+    <app-email-server-notifications #modalEmailServerNotifications></app-email-server-notifications>
 
-    <button
-      (click)="modalEmailServerNotifications.openModal()"
-      class="rightside__reload-btn"
-    >
+    <button (click)="modalEmailServerNotifications.openModal()" class="rightside__reload-btn">
       Email Server & Notifications
     </button>
 
-    <input
-      [(ngModel)]="searchText"
-      (ngModelChange)="onFilterBoxChanged()"
-      type="text"
-      class="rightside__filter"
-      placeholder="Filter by Project, Status, or Description"
-    />
+    <input [(ngModel)]="searchText" (ngModelChange)="onFilterBoxChanged()" type="text" class="rightside__filter"
+      placeholder="Filter by Project, Status, or Description" />
     <fa-icon [icon]="faFilter" class="rightside__filter-icon"></fa-icon>
   </div>
 </div>
@@ -37,20 +27,10 @@
 </div>
 
 <div class="ag-grid-angular-container">
-  <ag-grid-angular
-    class="ag-theme-alpine"
-    [columnDefs]="columnDefs"
-    [rowData]="rowData$ | async"
-    [defaultColDef]="defaultColDef"
-    [rowSelection]="'multiple'"
-    [animateRows]="true"
-    (gridReady)="onGridReady($event)"
-    (cellClicked)="onCellClicked($event)"
-    (selectionChanged)="onSelectionChanged($event)"
-    domLayout="autoHeight"
-    [pagination]="true"
-    [paginationPageSize]="6"
-  >
+  <ag-grid-angular class="ag-theme-alpine" [columnDefs]="columnDefs" [rowData]="rowData$ | async"
+    [defaultColDef]="defaultColDef" [rowSelection]="'multiple'" [animateRows]="true" (gridReady)="onGridReady($event)"
+    (cellClicked)="onCellClicked($event)" (selectionChanged)="onSelectionChanged($event)" domLayout="autoHeight"
+    [pagination]="true" [paginationPageSize]="6">
   </ag-grid-angular>
 </div>
 
@@ -60,97 +40,36 @@
   <span class="project__title">ADD NEW PROJECT TO GRID</span>
 
   <!-- * Alert -->
-  <div
-    *ngIf="dangerAlert"
-    class="alert alert-danger animation-alert"
-    role="alert"
-    data-name="Project ID must be a Number!"
-  ></div>
-  <div
-    *ngIf="successAlert"
-    class="alert alert-success animation-alert"
-    role="alert"
-    data-name="New Project Added Succesfully!"
-  ></div>
-  <div
-    *ngIf="statusAlert"
-    class="alert alert-danger animation-alert"
-    role="alert"
-    data-name="Status must be 'AVAILABLE', 'DISABLED' or 'DELETE_PENDING'"
-  ></div>
+  <div *ngIf="dangerAlert" class="alert alert-danger animation-alert" role="alert"
+    data-name="Project ID must be a Number!"></div>
+  <div *ngIf="successAlert" class="alert alert-success animation-alert" role="alert"
+    data-name="New Project Added Succesfully!"></div>
+  <div *ngIf="statusAlert" class="alert alert-danger animation-alert" role="alert"
+    data-name="Status must be 'AVAILABLE', 'DISABLED' or 'DELETE_PENDING'"></div>
 
   <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="project__data">
-    <input
-      [(ngModel)]="nameField"
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="Project name"
-      name="name"
-      ngModel
-      #name="ngModel"
-      (change)="getValue(name)"
-      required
-    />
+    <input [(ngModel)]="nameField" class="form-control form-control-sm" type="text" placeholder="Project name"
+      name="name" ngModel #name="ngModel" (change)="getValue(name)" required />
 
     <!-- ! Attribute for Id Field for Restricting Type Characters 
       * oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" -->
-    <input
-      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-      [(ngModel)]="idField"
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="Project ID"
-      name="id"
-      ngModel
-      #id="ngModel"
-      (change)="getValue(id); verifNumber(idField)"
-      required
-    />
-    <input
-      [(ngModel)]="descriptionField"
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="Description"
-      name="description"
-      ngModel
-      #description="ngModel"
-      (change)="getValue(description)"
-      required
-    />
+    <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" [(ngModel)]="idField"
+      class="form-control form-control-sm" type="text" placeholder="Project ID" name="id" ngModel #id="ngModel"
+      (change)="getValue(id); verifNumber(idField)" required />
+    <input [(ngModel)]="descriptionField" class="form-control form-control-sm" type="text" placeholder="Description"
+      name="description" ngModel #description="ngModel" (change)="getValue(description)" required />
     <!-- ! Attribute for Id Field for Restricting Type Numbers 
       * oninput="this.value = this.value.replace(/[^a-z]/, '')" -->
-    <input
-      (mousedown)="clearDateField()"
-      (mouseup)="clearDateField(); getValue(dateField)"
-      (onHidden)="getValue(dateField)"
-      (change)="getValue(dateField)"
+    <input (mousedown)="clearDateField()" (mouseup)="clearDateField(); getValue(dateField)"
+      (onHidden)="getValue(dateField)" (change)="getValue(dateField)"
       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1').replace(/[^a-z]/, '');"
-      autocomplete="off"
-      [(ngModel)]="dateField"
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="Date"
-      name="date"
-      ngModel
-      bsDatepicker
-      placement="top"
-      [outsideClick]="false"
-      [bsConfig]="{
+      autocomplete="off" [(ngModel)]="dateField" class="form-control form-control-sm" type="text" placeholder="Date"
+      name="date" ngModel bsDatepicker placement="top" [outsideClick]="false" [bsConfig]="{
         isAnimated: true,
         dateInputFormat: 'DD/MM/YYYY'
-      }"
-    />
-    <input
-      [(ngModel)]="statusField"
-      class="form-control form-control-sm"
-      type="text"
-      placeholder="Status"
-      name="status"
-      ngModel
-      #status="ngModel"
-      (change)="getValue(status); verifStatus(statusField)"
-      required
-    />
+      }" />
+    <input [(ngModel)]="statusField" class="form-control form-control-sm" type="text" placeholder="Status" name="status"
+      ngModel #status="ngModel" (change)="getValue(status); verifStatus(statusField)" required />
     <button [disabled]="isSubmit" type="submit" class="btn btn-primary custom">
       ADD PROJECT
     </button>
@@ -160,27 +79,15 @@
 <div class="filter-update-data">
   <span class="filter-update-data__title">FILTER GRID & UPDATE DATA</span>
   <div class="filter-update-data__container">
-    <button
-      (click)="filterByIdDesc()"
-      type="button"
-      class="btn btn-primary container__button"
-    >
+    <button (click)="filterByIdDesc()" type="button" class="btn btn-primary container__button">
       <fa-icon [icon]="faArrowsRotate" class="button__icon"></fa-icon>
       Filter by ID DESC
     </button>
-    <button
-      (click)="sizeColumnsToFit()"
-      type="button"
-      class="btn btn-primary container__button"
-    >
+    <button (click)="sizeColumnsToFit()" type="button" class="btn btn-primary container__button">
       <fa-icon [icon]="faArrowsLeftRight" class="button__icon"></fa-icon>
       Size Columns to fit Available Grid Space
     </button>
-    <button
-      (click)="updateGridNewData()"
-      type="button"
-      class="btn btn-primary container__button"
-    >
+    <button (click)="updateGridNewData()" type="button" class="btn btn-primary container__button">
       <fa-icon [icon]="faWrench" class="button__icon"></fa-icon>
       Update grid with new data from array
     </button>
