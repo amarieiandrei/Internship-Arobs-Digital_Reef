@@ -23,7 +23,7 @@ describe('Dashboard Page Automation Test Suite', () => {
             .should('have.css', 'display', 'flex')
     })
 
-    it('Grid Component', () => {
+    it.only('Grid Component', () => {
         cy.get('[data-cy="grid-header"]')
             .find('[data-cy="user-icon"]')
             .should('have.attr', 'size', 'xl')
@@ -84,5 +84,65 @@ describe('Dashboard Page Automation Test Suite', () => {
             .blur()
         cy.get('[data-cy="modal-header"]')
             .find('.header__xmark').click()
+
+        // Form Automation
+        cy.get('.new-project').should('contain', 'ADD NEW PROJECT TO GRID')
+        cy.get('form')
+            .find('[placeholder="Project name"]')
+            .type('name-test')
+        cy.get('form')
+            .find('[placeholder="Project ID"]')
+            .type('Salut!')
+        cy.get('form')
+            .find('[placeholder="Project ID"]')
+            .should('be.empty')
+        cy.get('form')
+            .find('[placeholder="Project ID"]')
+            .type('123')
+        cy.get('form')
+            .find('[placeholder="Description"]')
+            .type('description@test')
+
+        // Datepicker Automation
+        cy.get('form')
+            .find('[placeholder="Date"]')
+            .click()
+        let date = new Date()
+        date.setDate(date.getDate() + 2)
+        let futureDate = date.getDate();
+        let dateToAssert = `${futureDate}/11/2023`
+        cy.get('bs-calendar-layout')
+            .find('[role="gridcell"]').contains(futureDate).click()
+        cy.get('form')
+            .find('[placeholder="Date"]')
+            .invoke('val')
+            .then(text => {
+                cy.wrap(text).should('contain', dateToAssert)
+            })
+        cy.get('form')
+            .find('[placeholder="Status"]')
+            .type('BAD-STATUS')
+            .blur()
+        cy.get('[data-cy="status-danger-alert"]')
+            .should('have.css', 'padding', '8px')
+            .should('have.css', 'height', '40px')
+        cy.get('form')
+            .find('[type="submit"]')
+            .should('be.disabled')
+        cy.get('form')
+            .find('[placeholder="Status"]')
+            .clear()
+            .type('AVAILABLE')
+            .blur()
+        cy.get('form')
+            .find('[type="submit"]')
+            .should('be.enabled')
+            .click()
+
+        cy.get('[data-cy="grid"]')
+            .find('[role="gridcell"]').then(cels => {
+                cy.wrap(cels).each(cell => {
+                })
+            })
     })
 })
