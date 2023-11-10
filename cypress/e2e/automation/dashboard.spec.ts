@@ -139,10 +139,52 @@ describe('Dashboard Page Automation Test Suite', () => {
             .should('be.enabled')
             .click()
 
+        let value = '';
         cy.get('[data-cy="grid"]')
-            .find('[role="gridcell"]').then(cels => {
-                cy.wrap(cels).each(cell => {
+            .find('[role="gridcell"]').then(cells => {
+                cy.wrap(cells).each((cell, index) => {
+                    if (index == 0) {
+                        cy.wrap(cell).invoke('text')
+                            .then(text => { value = text.trim() })
+                            .then(() => expect(value).to.deep.eq('name-test'))
+                    } else if (index == 1) {
+                        cy.wrap(cell).invoke('text')
+                            .then(text => { value = text.trim() })
+                            .then(() => expect(value).to.deep.eq('123'))
+                    } else if (index == 2) {
+                        cy.wrap(cell).invoke('text')
+                            .then(text => { value = text.trim() })
+                            .then(() => expect(value).to.deep.eq('description@test'))
+                    } else if (index == 3) {
+                        cy.wrap(cell).invoke('text')
+                            .then(text => { value = text.trim() })
+                            .then(() => expect(value).to.deep.eq('12/11/2023'))
+                    } else if (index == 4) {
+                        cy.wrap(cell).invoke('text')
+                            .then(text => { value = text.trim() })
+                            .then(() => expect(value).to.deep.eq('AVAILABLE'))
+                        cy.wrap(cell)
+                            .invoke('attr', 'style', 'background-color: lightgreen')
+                            .should('have.attr', 'style', 'background-color: lightgreen')
+                    }
                 })
             })
+
+        // FILTER GRID & UPDATE DATA
+        cy.get('[data-cy="filter-update-data"]')
+            .find('span')
+            .should('contain', 'FILTER GRID & UPDATE DATA')
+
+        cy.get('[data-cy="filter-update-data"]')
+            .contains('Update grid with new data from array')
+            .click()
+
+        cy.get('[data-cy="filter-update-data"]')
+            .contains('Size Columns to fit Available Grid Space')
+            .click()
+
+        cy.get('[data-cy="filter-update-data"]')
+            .contains('Filter by ID DESC')
+            .click()
     })
 })
