@@ -23,7 +23,7 @@ describe('Dashboard Page Automation Test Suite', () => {
             .should('have.css', 'display', 'flex')
     })
 
-    it.only('Grid Component', () => {
+    it('Grid Component', () => {
         cy.get('[data-cy="grid-header"]')
             .find('[data-cy="user-icon"]')
             .should('have.attr', 'size', 'xl')
@@ -158,7 +158,7 @@ describe('Dashboard Page Automation Test Suite', () => {
                     } else if (index == 3) {
                         cy.wrap(cell).invoke('text')
                             .then(text => { value = text.trim() })
-                            .then(() => expect(value).to.deep.eq('12/11/2023'))
+                            .then(() => expect(value).to.deep.eq(`${futureDate}/11/2023`))
                     } else if (index == 4) {
                         cy.wrap(cell).invoke('text')
                             .then(text => { value = text.trim() })
