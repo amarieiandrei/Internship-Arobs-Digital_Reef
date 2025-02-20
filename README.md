@@ -1,5 +1,7 @@
 # DigitalReef
 
+# Area of skills: Angular, Typescript, HTML, CSS, Sass, RxJS, Bootstrap, NGX-Bootstrap, Npm, AG Grid, Git.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
 
 ## Development server
